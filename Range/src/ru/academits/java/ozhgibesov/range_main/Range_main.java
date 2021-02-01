@@ -1,8 +1,10 @@
-package ru.academits.java.ozhgibesov.range;
+package ru.academits.java.ozhgibesov.range_main;
+
+import ru.academits.java.ozhgibesov.range.Range;
 
 import java.util.Scanner;
 
-public class RangeMain {
+public class Range_main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         System.out.print("Введите начальную границу диапазона 1: ");
