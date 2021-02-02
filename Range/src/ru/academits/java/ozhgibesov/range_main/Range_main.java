@@ -8,68 +8,63 @@ public class Range_main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         System.out.print("Введите начальную границу диапазона 1: ");
-        double startRange1 = scanner.nextDouble();
+        double range1From = scanner.nextDouble();
 
         System.out.print("Введите конечную границу диапазона 1: ");
-        double endRange1 = scanner.nextDouble();
+        double range1To = scanner.nextDouble();
 
         System.out.print("Введите число для проверки входимости в диапазон 1: ");
         double number = scanner.nextDouble();
 
-        Range range1 = new Range(startRange1, endRange1);
+        Range range1 = new Range(range1From, range1To);
 
         System.out.println("Длина диапазона составляет " + range1.getLength());
 
         if (range1.isInside(number)) {
-            System.out.printf("Число %.2f входит в диапазон между %.2f и %.2f\n", number, startRange1, endRange1);
+            System.out.printf("Число %.2f входит в диапазон между %.2f и %.2f%n", number, range1From, range1To);
         } else {
-            System.out.printf("Число %.2f не входит в диапазон между %.2f и %.2f\n", number, startRange1, endRange1);
+            System.out.printf("Число %.2f не входит в диапазон между %.2f и %.2f%n", number, range1From, range1To);
         }
 
         System.out.print("Введите начальную границу диапазона 2: ");
-        double startRange2 = scanner.nextDouble();
+        double range2From = scanner.nextDouble();
 
         System.out.print("Введите конечную границу диапазона 2: ");
-        double endRange2 = scanner.nextDouble();
+        double range2To = scanner.nextDouble();
 
-        Range range2 = new Range(startRange2, endRange2);
+        Range range2 = new Range(range2From, range2To);
 
-        Range[] unitedRange;
-        unitedRange = range1.getUnion(range2);
+        System.out.printf("Диапазон 1 = %s%n", range1.toString());
+        System.out.printf("Диапазон 2 = %s%n", range2.toString());
 
-        System.out.printf("Диапазон 1 = [%.2f;%.2f]\n", range1.getFrom(), range1.getTo());
-        System.out.printf("Диапазон 2 = [%.2f;%.2f]\n", range2.getFrom(), range2.getTo());
+        Range[] union;
+        union = range1.getUnion(range2);
+        System.out.println("Результат объединения: " + getRangesArrayString(union));
 
-        StringBuilder unionResult = new StringBuilder("Результат объединения =");
-        for (Range range : unitedRange) {
-            if (range != null) {
-                unionResult.append(String.format(" [%.2f;%.2f]", range.getFrom(), range.getTo()));
-            } else {
-                unionResult.append(" [null]");
-            }
-        }
-
-        System.out.println(unionResult);
-
-        Range intersectionRange = range1.getIntersection(range2);
-        if (intersectionRange != null) {
-            System.out.printf("Результат пересечения: [%.2f;%.2f]\n", intersectionRange.getFrom(), intersectionRange.getTo());
+        Range intersection = range1.getIntersection(range2);
+        if (intersection != null) {
+            System.out.println("Результат пересечения: " + intersection.toString());
         } else {
-            System.out.println("Пересечение отсутствует");
+            System.out.println("Результат пересечения: []");
         }
 
-        Range[] subtractedRange;
-        subtractedRange = range1.getSubtraction(range2);
+        Range[] difference;
+        difference = range1.getDifference(range2);
+        System.out.println("Результат разности: " + getRangesArrayString(difference));
+    }
 
-        StringBuilder subtractedResult = new StringBuilder("Результат вычитания =");
-        for (Range range : subtractedRange) {
-            if (range != null) {
-                subtractedResult.append(String.format(" [%.2f;%.2f]", range.getFrom(), range.getTo()));
+    public static String getRangesArrayString(Range[] rangesArray) {
+        StringBuilder result = new StringBuilder("[");
+        for (int i = 0; i < rangesArray.length; i++) {
+            if (i < rangesArray.length - 1) {
+                result.append(rangesArray[i].toString());
+                result.append(", ");
             } else {
-                subtractedResult.append(" [null]");
+                result.append(rangesArray[i].toString());
             }
         }
 
-        System.out.println(subtractedResult);
+        result.append("]");
+        return result.toString();
     }
 }

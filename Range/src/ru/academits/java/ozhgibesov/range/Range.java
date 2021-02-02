@@ -4,6 +4,11 @@ public class Range {
     private double from;
     private double to;
 
+    public Range(double from, double to) {
+        this.from = from;
+        this.to = to;
+    }
+
     public double getFrom() {
         return from;
     }
@@ -20,11 +25,6 @@ public class Range {
         this.to = to;
     }
 
-    public Range(double from, double to) {
-        this.from = from;
-        this.to = to;
-    }
-
     public double getLength() {
         return to - from;
     }
@@ -33,57 +33,49 @@ public class Range {
         return number >= from && number <= to;
     }
 
-    public Range[] getUnion(Range otherRange) {
-        Range[] arrayRange = new Range[]{null};
-
-        if (this.getFrom() <= otherRange.getFrom() && this.getTo() <= otherRange.getTo() && otherRange.getFrom() <= this.getTo()) {
-            arrayRange = new Range[]{new Range(this.getFrom(), otherRange.getTo())};
-        } else if (otherRange.getFrom() <= this.getFrom() && otherRange.getTo() <= this.getTo() && this.getFrom() <= otherRange.getTo()) {
-            arrayRange = new Range[]{new Range(otherRange.getFrom(), this.getTo())};
-        } else if (this.getFrom() <= otherRange.getFrom() && this.getTo() >= otherRange.getTo()) {
-            arrayRange = new Range[]{new Range(this.getFrom(), this.getTo())};
-        } else if (otherRange.getFrom() <= this.getFrom() && otherRange.getTo() >= this.getTo()) {
-            arrayRange = new Range[]{new Range(otherRange.getFrom(), otherRange.getTo())};
-        } else if (this.getFrom() <= otherRange.getFrom() && this.getTo() <= otherRange.getTo() && otherRange.getFrom() > this.getTo()) {
-            arrayRange = new Range[2];
-            arrayRange[0] = new Range(this.getFrom(), this.getTo());
-            arrayRange[1] = new Range(otherRange.getFrom(), otherRange.getTo());
-        } else if (otherRange.getFrom() <= this.getFrom() && otherRange.getTo() <= this.getTo() && this.getFrom() > otherRange.getTo()) {
-            arrayRange = new Range[2];
-            arrayRange[0] = new Range(otherRange.getFrom(), otherRange.getTo());
-            arrayRange[1] = new Range(this.getFrom(), this.getTo());
+    public Range[] getUnion(Range range) {
+        if (Math.min(Math.max(from, to), Math.max(range.getFrom(), range.getTo())) >=
+                Math.max(Math.min(from, to), Math.min(range.getFrom(), range.getTo()))) {
+            return new Range[]{new Range(Math.min(from, range.getFrom()), Math.max(to, range.getTo()))};
         }
 
-        return arrayRange;
+        return new Range[]{new Range(Math.min(from, range.getFrom()), Math.min(to, range.getTo())),
+                new Range(Math.max(from, range.getFrom()), Math.max(to, range.getTo()))};
     }
 
-    public Range getIntersection(Range otherRange) {
-        if (this.getFrom() <= otherRange.getFrom() && this.getTo() < otherRange.getTo() && otherRange.getFrom() < this.getTo()) {
-            return new Range(otherRange.getFrom(), this.getTo());
-        } else if (otherRange.getFrom() <= this.getFrom() && this.getTo() > otherRange.getTo() && this.getFrom() < otherRange.getTo()) {
-            return new Range(this.getFrom(), otherRange.getTo());
-        } else if (this.getFrom() <= otherRange.getFrom() && otherRange.getTo() <= this.getTo()) {
-            return new Range(otherRange.getFrom(), otherRange.getTo());
-        } else if (otherRange.getFrom() <= this.getFrom() && this.getTo() <= otherRange.getTo()) {
-            return new Range(this.getFrom(), this.getTo());
-        }
+    public Range getIntersection(Range range) {
 
+        if (Math.min(Math.max(from, to), Math.max(range.getFrom(), range.getTo())) >
+                Math.max(Math.min(from, to), Math.min(range.getFrom(), range.getTo()))) {
+            return new Range(Math.max(from, range.getFrom()), Math.min(to, range.getTo()));
+        }
         return null;
     }
 
-    public Range[] getSubtraction(Range otherRange) {
-        Range[] arrayRange = new Range[]{null};
+    public Range[] getDifference(Range range) {
+        double epsilon = 0.01;
 
-        if (this.getFrom() < otherRange.getFrom() && this.getTo() < otherRange.getTo() && otherRange.getFrom() < this.getTo()) {
-            arrayRange = new Range[]{new Range(this.getFrom(), otherRange.getFrom())};
-        } else if (otherRange.getFrom() < this.getFrom() && otherRange.getTo() < this.getTo() && this.getFrom() < otherRange.getTo()) {
-            arrayRange = new Range[]{new Range(otherRange.getTo(), this.getTo())};
-        } else if (this.getFrom() < otherRange.getFrom() && this.getTo() > otherRange.getTo()) {
-            arrayRange = new Range[2];
-            arrayRange[0] = new Range(this.getFrom(), otherRange.getFrom());
-            arrayRange[1] = new Range(otherRange.getTo(), this.getTo());
+        if (from < range.getFrom() && to < range.getTo() && range.getFrom() < to) {
+            return new Range[]{new Range(from, range.getFrom() - epsilon)};
+        }
+        if (from == range.getFrom() && to > range.getTo()) {
+            return new Range[]{new Range(range.getTo() + epsilon, to)};
+        }
+        if (from < range.getFrom() && to == range.getTo()) {
+            return new Range[]{new Range(from, range.getFrom() - epsilon)};
+        }
+        if (range.getFrom() < from && range.getTo() < to && from < range.getTo()) {
+            return new Range[]{new Range(range.getTo() + epsilon, to)};
+        }
+        if (from < range.getFrom() && to > range.getTo()) {
+            return new Range[]{new Range(from, range.getFrom() - epsilon), new Range(range.getTo() + epsilon, to)};
         }
 
-        return arrayRange;
+        return new Range[0];
+    }
+
+    @Override
+    public String toString() {
+        return String.format("(%.2f;%.2f)", from, to);
     }
 }
