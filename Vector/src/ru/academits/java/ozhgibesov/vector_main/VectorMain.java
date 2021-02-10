@@ -50,5 +50,5 @@ public class VectorMain {
 
         System.out.println("Результат сложения vector3 + vector5 через статическую функцию = " + Vector.Sum(vector3, vector5));
         System.out.println("Результат вычитения vector1 - vector3 через статическую функцию = " + Vector.Difference(vector1, vector3));
-        System.out.println("Результат скалярного произведения vector1 * vector3 через статическую функцию = " + Vector.getScalarMultiplication(vector1, vector3));  }
+        System.out.println("Результат скалярного произведения vector1 * vector3 через статическую функцию = " + Vector.multiplicate(vector1, vector3));  }
 }

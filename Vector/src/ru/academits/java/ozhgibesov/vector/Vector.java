@@ -29,7 +29,7 @@ public class Vector {
         if (array.length == 0) {
             throw new IllegalArgumentException("Dimension cannot be <= 0");
         } else {
-            vector = Arrays.copyOf(array,array.length);
+            vector = Arrays.copyOf(array, array.length);
         }
     }
 
@@ -191,21 +191,22 @@ public class Vector {
         return new Vector(buffer);
     }
 
-    public static double getScalarMultiplication(Vector vector1, Vector vector2) {
+    public static double multiplicate(Vector vector1, Vector vector2) {
         double[] buffer = new double[Math.max(vector1.getSize(), vector2.getSize())];
+        double sum = 0;
 
         for (int i = 0; i < buffer.length; i++) {
             buffer[i] = 0;
 
-            if (i < vector1.getSize() && i < vector2.getSize()) {
+            if (i < vector1.getSize()) {
                 buffer[i] = vector1.getComponent(i) * vector2.getComponent(i);
-            } else if (i < vector2.getSize()) {
-                buffer[i] *= vector2.getComponent(i);
             } else {
-                buffer[i] *= vector1.getComponent(i);
+                buffer[i] = 0;
             }
+
+            sum += buffer[i];
         }
 
-        return Arrays.stream(buffer).sum();
+        return sum;
     }
 }
