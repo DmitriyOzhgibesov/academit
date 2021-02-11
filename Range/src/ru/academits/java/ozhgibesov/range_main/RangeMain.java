@@ -4,7 +4,7 @@ import ru.academits.java.ozhgibesov.range.Range;
 
 import java.util.Scanner;
 
-public class Range_main {
+public class RangeMain {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         System.out.print("Введите начальную границу диапазона 1: ");
@@ -34,37 +34,35 @@ public class Range_main {
 
         Range range2 = new Range(range2From, range2To);
 
-        System.out.printf("Диапазон 1 = %s%n", range1.toString());
-        System.out.printf("Диапазон 2 = %s%n", range2.toString());
+        System.out.printf("Диапазон 1 = %s%n", range1);
+        System.out.printf("Диапазон 2 = %s%n", range2);
 
-        Range[] union;
-        union = range1.getUnion(range2);
+        Range[] union = range1.getUnion(range2);
         System.out.println("Результат объединения: " + getRangesArrayString(union));
 
         Range intersection = range1.getIntersection(range2);
         if (intersection != null) {
-            System.out.println("Результат пересечения: " + intersection.toString());
+            System.out.println("Результат пересечения: " + intersection);
         } else {
             System.out.println("Результат пересечения: []");
         }
 
-        Range[] difference;
-        difference = range1.getDifference(range2);
+
+        Range[] difference = range1.getDifference(range2);
         System.out.println("Результат разности: " + getRangesArrayString(difference));
     }
 
     public static String getRangesArrayString(Range[] rangesArray) {
-        StringBuilder result = new StringBuilder("[");
+        StringBuilder stringBuilder = new StringBuilder("[");
+
         for (int i = 0; i < rangesArray.length; i++) {
+            stringBuilder.append(rangesArray[i]);
+
             if (i < rangesArray.length - 1) {
-                result.append(rangesArray[i].toString());
-                result.append(", ");
-            } else {
-                result.append(rangesArray[i].toString());
+                stringBuilder.append(", ");
             }
         }
 
-        result.append("]");
-        return result.toString();
+        return stringBuilder.append("]").toString();
     }
 }

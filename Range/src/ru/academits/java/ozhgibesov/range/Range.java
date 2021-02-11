@@ -34,41 +34,37 @@ public class Range {
     }
 
     public Range[] getUnion(Range range) {
-        if (Math.min(Math.max(from, to), Math.max(range.getFrom(), range.getTo())) >=
-                Math.max(Math.min(from, to), Math.min(range.getFrom(), range.getTo()))) {
-            return new Range[]{new Range(Math.min(from, range.getFrom()), Math.max(to, range.getTo()))};
+        if (Math.min(to, range.to) >= Math.max(from, range.from)) {
+            return new Range[]{new Range(Math.min(from, range.from), Math.max(to, range.to))};
         }
 
-        return new Range[]{new Range(Math.min(from, range.getFrom()), Math.min(to, range.getTo())),
-                new Range(Math.max(from, range.getFrom()), Math.max(to, range.getTo()))};
+        return new Range[]{
+                new Range(Math.min(from, range.from), Math.min(to, range.to)),
+                new Range(Math.max(from, range.from), Math.max(to, range.to))};
     }
 
     public Range getIntersection(Range range) {
-
-        if (Math.min(Math.max(from, to), Math.max(range.getFrom(), range.getTo())) >
-                Math.max(Math.min(from, to), Math.min(range.getFrom(), range.getTo()))) {
-            return new Range(Math.max(from, range.getFrom()), Math.min(to, range.getTo()));
+        if (Math.min(to, range.to) > Math.max(from, range.from)) {
+            return new Range(Math.max(from, range.from), Math.min(to, range.to));
         }
+
         return null;
     }
 
     public Range[] getDifference(Range range) {
-        double epsilon = 0.01;
-
-        if (from < range.getFrom() && to < range.getTo() && range.getFrom() < to) {
-            return new Range[]{new Range(from, range.getFrom() - epsilon)};
+        if (range.from >= to || range.to <= from) {
+            return new Range[]{new Range(from, to)};
         }
-        if (from == range.getFrom() && to > range.getTo()) {
-            return new Range[]{new Range(range.getTo() + epsilon, to)};
+        if (range.to > from && range.from <= from && to > range.to) {
+            return new Range[]{new Range(range.to, to)};
         }
-        if (from < range.getFrom() && to == range.getTo()) {
-            return new Range[]{new Range(from, range.getFrom() - epsilon)};
+        if (to >= range.from && from < range.from && range.to >= to) {
+            return new Range[]{new Range(from, range.from)};
         }
-        if (range.getFrom() < from && range.getTo() < to && from < range.getTo()) {
-            return new Range[]{new Range(range.getTo() + epsilon, to)};
-        }
-        if (from < range.getFrom() && to > range.getTo()) {
-            return new Range[]{new Range(from, range.getFrom() - epsilon), new Range(range.getTo() + epsilon, to)};
+        if (from < range.from && to > range.to) {
+            return new Range[]{
+                    new Range(from, range.from),
+                    new Range(range.to, to)};
         }
 
         return new Range[0];
@@ -76,6 +72,6 @@ public class Range {
 
     @Override
     public String toString() {
-        return String.format("(%.2f;%.2f)", from, to);
+        return String.format("(%.2f; %.2f)", from, to);
     }
 }
