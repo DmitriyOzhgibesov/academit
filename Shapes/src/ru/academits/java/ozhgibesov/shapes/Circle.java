@@ -37,7 +37,7 @@ public class Circle implements Shape {
 
     @Override
     public String toString() {
-        return "Circle {" + "radius=" + radius + '}';
+        return "Circle radius = " + radius;
     }
 
     @Override
@@ -56,7 +56,7 @@ public class Circle implements Shape {
     @Override
     public int hashCode() {
         final int prime = 2;
-        int hash = 3;
+        int hash = 1;
         hash = prime * hash + Double.hashCode(radius);
         return hash;
     }

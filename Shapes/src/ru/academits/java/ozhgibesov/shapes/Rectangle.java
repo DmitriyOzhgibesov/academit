@@ -39,7 +39,7 @@ public class Rectangle implements Shape {
 
     @Override
     public String toString() {
-        return "Rectangle {" + "width=" + width + ", height=" + height + '}';
+        return "Rectangle { width = " + width + ", height = " + height + " }";
     }
 
     @Override
@@ -57,8 +57,8 @@ public class Rectangle implements Shape {
 
     @Override
     public int hashCode() {
-        final int prime = 5;
-        int hash = 7;
+        final int prime = 3;
+        int hash = 1;
         hash = prime * hash + Double.hashCode(width);
         hash = prime * hash + Double.hashCode(height);
         return hash;

@@ -27,7 +27,7 @@ public class Square implements Shape {
 
     @Override
     public double getArea() {
-        return Math.pow(sideLength, 2);
+        return sideLength * sideLength;
     }
 
     @Override
@@ -37,7 +37,7 @@ public class Square implements Shape {
 
     @Override
     public String toString() {
-        return "Square {" + "sideLength=" + sideLength + '}';
+        return "Square { " + "sideLength = " + sideLength + " }";
     }
 
     @Override
@@ -50,13 +50,13 @@ public class Square implements Shape {
         }
 
         Square square = (Square) o;
-        return sideLength==square.sideLength;
+        return sideLength == square.sideLength;
     }
 
     @Override
     public int hashCode() {
-        final int prime = 11;
-        int hash = 13;
+        final int prime = 5;
+        int hash = 1;
         hash = prime * hash + Double.hashCode(sideLength);
         return hash;
     }

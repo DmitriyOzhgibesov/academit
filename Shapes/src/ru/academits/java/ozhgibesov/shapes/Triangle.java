@@ -1,7 +1,6 @@
 package ru.academits.java.ozhgibesov.shapes;
 
 public class Triangle implements Shape {
-
     private double x1;
     private double x2;
     private double x3;
@@ -10,7 +9,7 @@ public class Triangle implements Shape {
     private double y3;
 
     public Triangle(double x1, double y1, double x2, double y2, double x3, double y3) {
-        if (Math.abs(((y3 - y1) * (x2 - x1)) - ((x3 - x1) * (y2 - y1))) <= EPSILON) {
+        if (isLine(x1, x2, x3, y1, y2, y3)) {
             System.out.println("Невозможно построить треугольник т.к. точки расположены на одной прямой.");
         } else {
             this.x1 = x1;
@@ -49,7 +48,7 @@ public class Triangle implements Shape {
     }
 
     public void setX1(double x1) {
-        if (Math.abs(((y3 - y1) * (x2 - x1)) - ((x3 - x1) * (y2 - y1))) <= EPSILON) {
+        if (isLine(x1, x2, x3, y1, y2, y3)) {
             System.out.println("Невозможно задать компоненту т.к. точки выстраиваются в линию. Компонента осталась без изменений.");
         } else {
             this.x1 = x1;
@@ -57,7 +56,7 @@ public class Triangle implements Shape {
     }
 
     public void setX2(double x2) {
-        if (Math.abs(((y3 - y1) * (x2 - x1)) - ((x3 - x1) * (y2 - y1))) <= EPSILON) {
+        if (isLine(x1, x2, x3, y1, y2, y3)) {
             System.out.println("Невозможно задать компоненту т.к. точки выстраиваются в линию. Компонента осталась без изменений.");
         } else {
             this.x2 = x2;
@@ -65,7 +64,7 @@ public class Triangle implements Shape {
     }
 
     public void setX3(double x3) {
-        if (Math.abs(((y3 - y1) * (x2 - x1)) - ((x3 - x1) * (y2 - y1))) <= EPSILON) {
+        if (isLine(x1, x2, x3, y1, y2, y3)) {
             System.out.println("Невозможно задать компоненту т.к. точки выстраиваются в линию. Компонента осталась без изменений.");
         } else {
             this.x3 = x3;
@@ -73,7 +72,7 @@ public class Triangle implements Shape {
     }
 
     public void setY1(double y1) {
-        if (Math.abs(((y3 - y1) * (x2 - x1)) - ((x3 - x1) * (y2 - y1))) <= EPSILON) {
+        if (isLine(x1, x2, x3, y1, y2, y3)) {
             System.out.println("Невозможно задать компоненту т.к. точки выстраиваются в линию. Компонента осталась без изменений.");
         } else {
             this.y1 = y1;
@@ -81,7 +80,7 @@ public class Triangle implements Shape {
     }
 
     public void setY2(double y2) {
-        if (Math.abs(((y3 - y1) * (x2 - x1)) - ((x3 - x1) * (y2 - y1))) <= EPSILON) {
+        if (isLine(x1, x2, x3, y1, y2, y3)) {
             System.out.println("Невозможно задать компоненту т.к. точки выстраиваются в линию. Компонента осталась без изменений.");
         } else {
             this.y2 = y2;
@@ -89,7 +88,7 @@ public class Triangle implements Shape {
     }
 
     public void setY3(double y3) {
-        if (Math.abs(((y3 - y1) * (x2 - x1)) - ((x3 - x1) * (y2 - y1))) <= EPSILON) {
+        if (isLine(x1, x2, x3, y1, y2, y3)) {
             System.out.println("Невозможно задать компоненту т.к. точки выстраиваются в линию. Компонента осталась без изменений.");
         } else {
             this.y3 = y3;
@@ -118,16 +117,16 @@ public class Triangle implements Shape {
 
     @Override
     public double getPerimeter() {
-        double aBLength = Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2));
-        double bCLength = Math.sqrt(Math.pow(x3 - x2, 2) + Math.pow(y3 - y2, 2));
-        double aCLength = Math.sqrt(Math.pow(x3 - x1, 2) + Math.pow(y3 - y1, 2));
+        double abLength = getSideLength(x1, y1, x2, y2);
+        double bcLength = getSideLength(x2, y2, x3, y3);
+        double acLength = getSideLength(x1, y1, x3, y3);
 
-        return aBLength + bCLength + aCLength;
+        return abLength + bcLength + acLength;
     }
 
     @Override
     public String toString() {
-        return "Triangle {" + "x1 = " + x1 + ", x2 = " + x2 + ", x3 = " + x3 + ", y1 = " + y1 + ", y2 = " + y2 + ", y3 = " + y3 + '}';
+        return "Triangle { x1 = " + x1 + ", x2 = " + x2 + ", x3 = " + x3 + ", y1 = " + y1 + ", y2 = " + y2 + ", y3 = " + y3 + " }";
     }
 
     @Override
@@ -145,8 +144,8 @@ public class Triangle implements Shape {
 
     @Override
     public int hashCode() {
-        final int prime = 17;
-        int hash = 19;
+        final int prime = 7;
+        int hash = 1;
         hash = prime * hash + Double.hashCode(x1);
         hash = prime * hash + Double.hashCode(x2);
         hash = prime * hash + Double.hashCode(x3);
@@ -156,7 +155,11 @@ public class Triangle implements Shape {
         return hash;
     }
 
-    private double getSideLength(double x1, double y1, double x2, double y2) {
-        return Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2));
+    private static boolean isLine(double x1, double x2, double x3, double y1, double y2, double y3) {
+        return Math.abs((y3 - y1) * (x2 - x1) - (x3 - x1) * (y2 - y1)) <= EPSILON;
+    }
+
+    private static double getSideLength(double x1, double y1, double x2, double y2) {
+        return Math.sqrt((x2 - x1) * (x2 - x1) + (y2 - y1) * (y2 - y1));
     }
 }
