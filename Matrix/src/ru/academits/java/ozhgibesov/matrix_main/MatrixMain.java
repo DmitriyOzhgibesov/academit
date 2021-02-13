@@ -143,10 +143,15 @@ public class MatrixMain {
 
         System.out.println("Результат работы оператора toString():" + matrixMul);
 
-        double[] line1MatrixDeterminant = new double[]{2, 4, 6};
-        double[] line2MatrixDeterminant = new double[]{6, 4, 2};
-        double[] line3MatrixDeterminant = new double[]{4, 2, 6};
-        double[][] arrayDeterminant = new double[][]{line1MatrixDeterminant, line2MatrixDeterminant, line3MatrixDeterminant};
+        double[] line1MatrixDeterminant = new double[]{1, 1, 2, 3, 4, 5};
+        double[] line2MatrixDeterminant = new double[]{0, 2, 6, 7, 8, 9};
+        double[] line3MatrixDeterminant = new double[]{1, 2, 3, 10, 11, 12};
+        double[] line4MatrixDeterminant = new double[]{3, 4, 5, 4, 13, 14};
+        double[] line5MatrixDeterminant = new double[]{6, 7, 8, 9, 5, 15};
+        double[] line6MatrixDeterminant = new double[]{10, 11, 12, 13, 14, 6};
+        double[][] arrayDeterminant = new double[][]{
+                line1MatrixDeterminant, line2MatrixDeterminant, line3MatrixDeterminant,
+                line4MatrixDeterminant, line5MatrixDeterminant, line6MatrixDeterminant};
 
         Matrix matrixDeterminant = new Matrix(arrayDeterminant);
         System.out.println("Определитель матрицы 6: " + matrixDeterminant.getDeterminant());

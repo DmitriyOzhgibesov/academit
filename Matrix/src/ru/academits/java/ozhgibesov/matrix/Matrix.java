@@ -3,47 +3,41 @@ package ru.academits.java.ozhgibesov.matrix;
 import ru.academits.java.ozhgibesov.vector.Vector;
 
 public class Matrix {
-
     Vector[] rows;
-    int rowsCount;
 
     public Matrix(int rowsCount, int columnsCount) {
-        this.rowsCount = rowsCount;
         rows = new Vector[rowsCount];
 
-        for (int i = 0; i < rowsCount; i++) {
+        for (int i = 0; i < rows.length; i++) {
             rows[i] = new Vector(columnsCount);
         }
     }
 
     public Matrix(Matrix matrix) {
-        this.rowsCount = matrix.getDimensions()[0];
-        rows = new Vector[rowsCount];
+        rows = new Vector[matrix.rows.length];
 
-        for (int i = 0; i < matrix.getDimensions()[0]; i++) {
+        for (int i = 0; i < rows.length; i++) {
             rows[i] = new Vector(matrix.getVectorRow(i));
         }
     }
 
-    public Matrix(double[][] matrix) {
-        rowsCount = matrix.length;
-        rows = new Vector[rowsCount];
-        int maxRowLength = getMaxRowLength(matrix);
+    public Matrix(double[][] matrixArray) {
+        rows = new Vector[matrixArray.length];
+        int maxRowLength = getMaxRowLength(matrixArray);
 
-        for (int i = 0; i < rowsCount; i++) {
-            rows[i] = new Vector(maxRowLength, matrix[i]);
+        for (int i = 0; i < rows.length; i++) {
+            rows[i] = new Vector(maxRowLength, matrixArray[i]);
         }
     }
 
     public Matrix(Vector[] vectorsArray) {
-        rowsCount = vectorsArray.length;
-        rows = new Vector[rowsCount];
-        int maxLineLength = getMaxRowLength(vectorsArray);
+        rows = new Vector[vectorsArray.length];
+        int maxRowLength = getMaxRowLength(vectorsArray);
 
-        for (int i = 0; i < rowsCount; i++) {
+        for (int i = 0; i < rows.length; i++) {
             rows[i] = new Vector(getMaxRowLength(vectorsArray));
 
-            for (int j = 0; j < maxLineLength; j++) {
+            for (int j = 0; j < maxRowLength; j++) {
                 if (j >= vectorsArray[i].getSize()) {
                     rows[i].setComponent(j, 0);
                 } else {
@@ -54,7 +48,7 @@ public class Matrix {
     }
 
     public int[] getDimensions() {
-        return new int[]{rowsCount, rows[0].getSize()};
+        return new int[]{rows.length, rows[0].getSize()};
     }
 
     public Vector getVectorRow(int index) {
@@ -62,9 +56,13 @@ public class Matrix {
     }
 
     public Vector getVectorColumn(int index) {
-        Vector vectorColumn = new Vector(rowsCount);
+        if (index > rows[0].getSize() - 1 || index < 0) {
+            throw new IllegalArgumentException("Индекс выходит за рамки количества колонок матрицы...");
+        }
 
-        for (int i = 0; i < rowsCount; i++) {
+        Vector vectorColumn = new Vector(rows.length);
+
+        for (int i = 0; i < rows.length; i++) {
             vectorColumn.setComponent(i, rows[i].getComponent(index));
         }
 
@@ -72,10 +70,10 @@ public class Matrix {
     }
 
     public Matrix getTransposition() {
-        int rowsCount = this.getDimensions()[1];
-        Vector[] vectorArray = new Vector[rowsCount];
+        int newRowsCount = rows[0].getSize();
+        Vector[] vectorArray = new Vector[newRowsCount];
 
-        for (int i = 0; i < rowsCount; i++) {
+        for (int i = 0; i < newRowsCount; i++) {
             vectorArray[i] = new Vector(this.getVectorColumn(i));
         }
 
@@ -83,9 +81,9 @@ public class Matrix {
     }
 
     public Matrix getScalarMultiplication(double scalar) {
-        Vector[] vectorArray = new Vector[rowsCount];
+        Vector[] vectorArray = new Vector[rows.length];
 
-        for (int i = 0; i < rowsCount; i++) {
+        for (int i = 0; i < rows.length; i++) {
             vectorArray[i] = new Vector(rows[i].getScalarMultiplication(scalar));
         }
 
@@ -96,7 +94,7 @@ public class Matrix {
         if (rows.length != rows[0].getSize()) {
             throw new IllegalArgumentException("Невозможно найти определитель не квадратной матрицы");
         }
-        if (rowsCount == 1 && rows[0].getSize() == 1) {
+        if (rows.length == 1 && rows[0].getSize() == 1) {
             return rows[0].getComponent(0);
         }
 
@@ -104,9 +102,9 @@ public class Matrix {
 
         for (int j = 0; j < rows.length; j++) {
             if (j % 2 == 0)
-                det += rows[0].getComponent(j) * getSubmatrix(this, 0, j).getDeterminant();
+                det += rows[0].getComponent(j) * getSubmatrix(this, j).getDeterminant();
             else
-                det -= rows[0].getComponent(j) * getSubmatrix(this, 0, j).getDeterminant();
+                det -= rows[0].getComponent(j) * getSubmatrix(this, j).getDeterminant();
         }
 
         return det;
@@ -115,7 +113,7 @@ public class Matrix {
     public Matrix getVectorMultiplication(Vector vector) {
         double[][] result = new double[vector.getSize()][1];
 
-        for (int i = 0; i < rowsCount; i++) {
+        for (int i = 0; i < rows.length; i++) {
             result[i][0] = Vector.multiplicate(rows[i], vector);
         }
 
@@ -123,9 +121,9 @@ public class Matrix {
     }
 
     public Matrix getDifference(Matrix matrix) {
-        Vector[] vectorArray = new Vector[rowsCount];
+        Vector[] vectorArray = new Vector[rows.length];
 
-        for (int i = 0; i < rowsCount; i++) {
+        for (int i = 0; i < rows.length; i++) {
             vectorArray[i] = new Vector(Vector.Difference(rows[i],
                     matrix.rows[i]));
         }
@@ -134,9 +132,9 @@ public class Matrix {
     }
 
     public Matrix getSum(Matrix matrix) {
-        Vector[] vectorArray = new Vector[rowsCount];
+        Vector[] vectorArray = new Vector[rows.length];
 
-        for (int i = 0; i < rowsCount; i++) {
+        for (int i = 0; i < rows.length; i++) {
             vectorArray[i] = new Vector(Vector.Sum(rows[i], matrix.rows[i]));
         }
 
@@ -144,9 +142,9 @@ public class Matrix {
     }
 
     public static Matrix Diff(Matrix matrix1, Matrix matrix2) {
-        Vector[] vectorArray = new Vector[matrix1.rowsCount];
+        Vector[] vectorArray = new Vector[matrix1.rows.length];
 
-        for (int i = 0; i < matrix1.rowsCount; i++) {
+        for (int i = 0; i < matrix1.rows.length; i++) {
             vectorArray[i] = new Vector(Vector.Difference(matrix1.rows[i],
                     matrix2.rows[i]));
         }
@@ -155,9 +153,9 @@ public class Matrix {
     }
 
     public static Matrix Sum(Matrix matrix1, Matrix matrix2) {
-        Vector[] vectorArray = new Vector[matrix1.rowsCount];
+        Vector[] vectorArray = new Vector[matrix1.rows.length];
 
-        for (int i = 0; i < matrix1.rowsCount; i++) {
+        for (int i = 0; i < matrix1.rows.length; i++) {
             vectorArray[i] = new Vector(Vector.Sum(matrix1.rows[i],
                     matrix2.rows[i]));
         }
@@ -166,9 +164,9 @@ public class Matrix {
     }
 
     public static Matrix multiplicate(Matrix matrix1, Matrix matrix2) {
-        double[][] result = new double[matrix1.rowsCount][matrix1.rows.length];
+        double[][] result = new double[matrix1.rows.length][matrix1.rows.length];
 
-        for (int i = 0; i < matrix1.rowsCount; i++) {
+        for (int i = 0; i < matrix1.rows.length; i++) {
             for (int j = 0; j < matrix1.rows.length; j++) {
                 result[i][j] = Vector.multiplicate(matrix1.rows[i], matrix2
                         .getVectorColumn(j));
@@ -181,8 +179,9 @@ public class Matrix {
     @Override
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder("{");
-        for (int i = 0; i < rowsCount; i++) {
-            if (i != rowsCount - 1) {
+
+        for (int i = 0; i < rows.length; i++) {
+            if (i != rows.length - 1) {
                 stringBuilder.append(rows[i]);
                 stringBuilder.append(", ");
             } else {
@@ -205,29 +204,29 @@ public class Matrix {
         return maxLineLength;
     }
 
-    private int getMaxRowLength(Vector[] linesArray) {
-        int maxLineLength = 0;
+    private int getMaxRowLength(Vector[] rows) {
+        int maxRowLength = 0;
 
-        for (Vector vector : linesArray) {
-            if (vector.getSize() > maxLineLength) {
-                maxLineLength = vector.getSize();
+        for (Vector vector : rows) {
+            if (vector.getSize() > maxRowLength) {
+                maxRowLength = vector.getSize();
             }
         }
 
-        return maxLineLength;
+        return maxRowLength;
     }
 
-    private Matrix getSubmatrix(Matrix matrix, int rowToExclude, int colToExclude) {
-        double[][] values = new double[matrix.rowsCount - 1][matrix.rows.length - 1];
+    private Matrix getSubmatrix(Matrix matrix, int colToExclude) {
+        double[][] values = new double[matrix.rows.length - 1][matrix.rows.length - 1];
 
-        for (int i = 0; i < matrix.rowsCount; i++) {
+        for (int i = 0; i < matrix.rows.length; i++) {
             if (i < rows.length - 1) {
-                values[i] = new double[matrix.rowsCount - 1];
+                values[i] = new double[matrix.rows.length - 1];
             }
 
             for (int j = 0; j < matrix.rows.length; j++)
-                if (i != rowToExclude && j != colToExclude)
-                    values[i < rowToExclude ? i : i - 1][j < colToExclude ? j : j - 1] = matrix.rows[i].getComponent(j);
+                if (i != 0 && j != colToExclude)
+                    values[i - 1][j < colToExclude ? j : j - 1] = matrix.rows[i].getComponent(j);
         }
 
         return new Matrix(values);
