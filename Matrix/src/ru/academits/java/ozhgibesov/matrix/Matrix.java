@@ -84,7 +84,7 @@ public class Matrix {
         Vector[] vectorArray = new Vector[rows.length];
 
         for (int i = 0; i < rows.length; i++) {
-            vectorArray[i] = new Vector(rows[i].getScalarMultiplication(scalar));
+            vectorArray[i] = new Vector(rows[i].multiplyScalar(scalar));
         }
 
         return new Matrix(vectorArray);
@@ -114,7 +114,7 @@ public class Matrix {
         double[][] result = new double[vector.getSize()][1];
 
         for (int i = 0; i < rows.length; i++) {
-            result[i][0] = Vector.multiplicate(rows[i], vector);
+            result[i][0] = Vector.getScalarMultiplication(rows[i], vector);
         }
 
         return new Matrix(result);
@@ -124,7 +124,7 @@ public class Matrix {
         Vector[] vectorArray = new Vector[rows.length];
 
         for (int i = 0; i < rows.length; i++) {
-            vectorArray[i] = new Vector(Vector.Difference(rows[i],
+            vectorArray[i] = new Vector(Vector.getDifference(rows[i],
                     matrix.rows[i]));
         }
 
@@ -135,7 +135,7 @@ public class Matrix {
         Vector[] vectorArray = new Vector[rows.length];
 
         for (int i = 0; i < rows.length; i++) {
-            vectorArray[i] = new Vector(Vector.Sum(rows[i], matrix.rows[i]));
+            vectorArray[i] = new Vector(Vector.getSum(rows[i], matrix.rows[i]));
         }
 
         return new Matrix(vectorArray);
@@ -145,7 +145,7 @@ public class Matrix {
         Vector[] vectorArray = new Vector[matrix1.rows.length];
 
         for (int i = 0; i < matrix1.rows.length; i++) {
-            vectorArray[i] = new Vector(Vector.Difference(matrix1.rows[i],
+            vectorArray[i] = new Vector(Vector.getDifference(matrix1.rows[i],
                     matrix2.rows[i]));
         }
 
@@ -156,7 +156,7 @@ public class Matrix {
         Vector[] vectorArray = new Vector[matrix1.rows.length];
 
         for (int i = 0; i < matrix1.rows.length; i++) {
-            vectorArray[i] = new Vector(Vector.Sum(matrix1.rows[i],
+            vectorArray[i] = new Vector(Vector.getSum(matrix1.rows[i],
                     matrix2.rows[i]));
         }
 
@@ -168,7 +168,7 @@ public class Matrix {
 
         for (int i = 0; i < matrix1.rows.length; i++) {
             for (int j = 0; j < matrix1.rows.length; j++) {
-                result[i][j] = Vector.multiplicate(matrix1.rows[i], matrix2
+                result[i][j] = Vector.getScalarMultiplication(matrix1.rows[i], matrix2
                         .getVectorColumn(j));
             }
         }
