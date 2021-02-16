@@ -38,7 +38,7 @@ public class RangeMain {
         System.out.printf("Диапазон 2 = %s%n", range2);
 
         Range[] union = range1.getUnion(range2);
-        System.out.println("Результат объединения: " + getRangesArrayString(union));
+        System.out.println("Результат объединения: " + getRangesString(union));
 
         Range intersection = range1.getIntersection(range2);
         if (intersection != null) {
@@ -49,16 +49,16 @@ public class RangeMain {
 
 
         Range[] difference = range1.getDifference(range2);
-        System.out.println("Результат разности: " + getRangesArrayString(difference));
+        System.out.println("Результат разности: " + getRangesString(difference));
     }
 
-    public static String getRangesArrayString(Range[] rangesArray) {
+    public static String getRangesString(Range[] ranges) {
         StringBuilder stringBuilder = new StringBuilder("[");
 
-        for (int i = 0; i < rangesArray.length; i++) {
-            stringBuilder.append(rangesArray[i]);
+        for (int i = 0; i < ranges.length; i++) {
+            stringBuilder.append(ranges[i]);
 
-            if (i < rangesArray.length - 1) {
+            if (i < ranges.length - 1) {
                 stringBuilder.append(", ");
             }
         }

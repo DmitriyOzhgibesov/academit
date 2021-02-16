@@ -40,15 +40,19 @@ public class Range {
 
         return new Range[]{
                 new Range(Math.min(from, range.from), Math.min(to, range.to)),
-                new Range(Math.max(from, range.from), Math.max(to, range.to))};
+                new Range(Math.max(from, range.from), Math.max(to, range.to))
+        };
     }
 
     public Range getIntersection(Range range) {
-        if (Math.min(to, range.to) > Math.max(from, range.from)) {
-            return new Range(Math.max(from, range.from), Math.min(to, range.to));
+        double newFrom = Math.max(from, range.from);
+        double newTo = Math.min(to, range.to);
+
+        if (newTo <= newFrom) {
+            return null;
         }
 
-        return null;
+        return new Range(newFrom, newTo);
     }
 
     public Range[] getDifference(Range range) {
