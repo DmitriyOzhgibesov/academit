@@ -47,7 +47,6 @@ public class RangeMain {
             System.out.println("Результат пересечения: []");
         }
 
-
         Range[] difference = range1.getDifference(range2);
         System.out.println("Результат разности: " + getRangesString(difference));
     }
