@@ -10,17 +10,17 @@ public class Triangle implements Shape {
 
     public Triangle(double x1, double y1, double x2, double y2, double x3, double y3) {
         if (isLine(x1, x2, x3, y1, y2, y3)) {
-            System.out.println("Невозможно построить треугольник т.к. точки расположены на одной прямой.");
-        } else {
-            this.x1 = x1;
-            this.y1 = y1;
-
-            this.x2 = x2;
-            this.y2 = y2;
-
-            this.x3 = x3;
-            this.y3 = y3;
+            throw new IllegalArgumentException("Не удалось построить треугольник. Точки выстраиваются на одной прямой.");
         }
+
+        this.x1 = x1;
+        this.y1 = y1;
+
+        this.x2 = x2;
+        this.y2 = y2;
+
+        this.x3 = x3;
+        this.y3 = y3;
     }
 
     public double getX1() {
@@ -49,50 +49,62 @@ public class Triangle implements Shape {
 
     public void setX1(double x1) {
         if (isLine(x1, x2, x3, y1, y2, y3)) {
-            System.out.println("Невозможно задать компоненту т.к. точки выстраиваются в линию. Компонента осталась без изменений.");
-        } else {
-            this.x1 = x1;
+            throw new IllegalArgumentException("Не удалось задать значение компоненте x1." +
+                    " Точки выстраиваются в линию." +
+                    " Компонента осталась без изменений.");
         }
+
+        this.x1 = x1;
     }
 
     public void setX2(double x2) {
         if (isLine(x1, x2, x3, y1, y2, y3)) {
-            System.out.println("Невозможно задать компоненту т.к. точки выстраиваются в линию. Компонента осталась без изменений.");
-        } else {
-            this.x2 = x2;
+            throw new IllegalArgumentException("Не удалось задать значение компоненте x2." +
+                    " Точки выстраиваются в линию." +
+                    " Компонента осталась без изменений.");
         }
+
+        this.x2 = x2;
     }
 
     public void setX3(double x3) {
         if (isLine(x1, x2, x3, y1, y2, y3)) {
-            System.out.println("Невозможно задать компоненту т.к. точки выстраиваются в линию. Компонента осталась без изменений.");
-        } else {
-            this.x3 = x3;
+            throw new IllegalArgumentException("Не удалось задать значение компоненте x3." +
+                    " Точки выстраиваются в линию." +
+                    " Компонента осталась без изменений.");
         }
+
+        this.x3 = x3;
     }
 
     public void setY1(double y1) {
         if (isLine(x1, x2, x3, y1, y2, y3)) {
-            System.out.println("Невозможно задать компоненту т.к. точки выстраиваются в линию. Компонента осталась без изменений.");
-        } else {
-            this.y1 = y1;
+            throw new IllegalArgumentException("Не удалось задать значение компоненте y1." +
+                    " Точки выстраиваются в линию." +
+                    " Компонента осталась без изменений.");
         }
+
+        this.y1 = y1;
     }
 
     public void setY2(double y2) {
         if (isLine(x1, x2, x3, y1, y2, y3)) {
-            System.out.println("Невозможно задать компоненту т.к. точки выстраиваются в линию. Компонента осталась без изменений.");
-        } else {
-            this.y2 = y2;
+            throw new IllegalArgumentException("Не удалось задать значение компоненте y2." +
+                    " Точки выстраиваются в линию." +
+                    " Компонента осталась без изменений.");
         }
+
+        this.y2 = y2;
     }
 
     public void setY3(double y3) {
         if (isLine(x1, x2, x3, y1, y2, y3)) {
-            System.out.println("Невозможно задать компоненту т.к. точки выстраиваются в линию. Компонента осталась без изменений.");
-        } else {
-            this.y3 = y3;
+            throw new IllegalArgumentException("Не удалось задать значение компоненте y3." +
+                    " Точки выстраиваются в линию." +
+                    " Компонента осталась без изменений.");
         }
+
+        this.y3 = y3;
     }
 
     @Override
@@ -126,7 +138,7 @@ public class Triangle implements Shape {
 
     @Override
     public String toString() {
-        return "Triangle { x1 = " + x1 + ", x2 = " + x2 + ", x3 = " + x3 + ", y1 = " + y1 + ", y2 = " + y2 + ", y3 = " + y3 + " }";
+        return "Triangle: { (" + x1 + "; " + y1 + "), (" + x2 + "; " + y2 + "), (" + x3 + "; " + y3 + ") }";
     }
 
     @Override
