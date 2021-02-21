@@ -18,13 +18,13 @@ public class VectorMain {
 
         System.out.printf("Проверка метода vector3.getSize(): %s%n", vector3.getSize());
 
-        Vector addition = vector4.addVector(vector3);
+        Vector addition = vector4.add(vector3);
         System.out.printf("Прибавление vector3 к vector4: %s%n", addition);
 
-        Vector difference = vector2.substractVector(vector3);
+        Vector difference = vector2.subtract(vector3);
         System.out.printf("Вычитание vector3 из vector2: %s%n", difference);
 
-        Vector scalarMultiplication = vector4.multiplyScalar(2);
+        Vector scalarMultiplication = vector4.multiplyByScalar(2);
         System.out.printf("Умножение vector4 на 2: %s%n", scalarMultiplication);
 
         Vector reverse = vector3.reverse();
