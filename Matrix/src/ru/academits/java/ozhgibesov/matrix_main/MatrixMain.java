@@ -64,7 +64,7 @@ public class MatrixMain {
         System.out.println(column);
 
         System.out.println("Результат транспонирования матрицы 4:");
-        Matrix transposition = matrix4.getTransposition();
+        Matrix transposition = matrix4.transpose();
 
         System.out.printf("Размерность транспонированной матрицы 4:%dx%d%n",
                 transposition.getDimensions()[0],
@@ -76,7 +76,7 @@ public class MatrixMain {
 
 
         System.out.println("Результат умножения матрицы 4 на число 2:");
-        Matrix scalarMultiplication = matrix4.getScalarMultiplication(2);
+        Matrix scalarMultiplication = matrix4.multiplyByScalar(2);
 
         for (int i = 0; i < scalarMultiplication.getDimensions()[0]; i++) {
             System.out.println(scalarMultiplication.getVectorRow(i));
@@ -99,28 +99,28 @@ public class MatrixMain {
 
         Vector vector = new Vector(new double[]{-1, 2, -3});
 
-        Matrix vectorMul = matrix6.getVectorMultiplication(vector);
+        Matrix vectorMul = matrix6.multiplyByVector(vector);
         for (int i = 0; i < vectorMul.getDimensions()[0]; i++) {
             System.out.println(vectorMul.getVectorRow(i));
         }
 
         System.out.println("Результат сложения матрицы 5 и 6:");
-        Matrix matrixSum = matrix5.getSum(matrix6);
+        Matrix matrixSum = matrix5.add(matrix6);
 
         for (int i = 0; i < matrixSum.getDimensions()[0]; i++) {
             System.out.println(matrixSum.getVectorRow(i));
         }
 
         System.out.println("Результат статического сложения матрицы 5 и 6:");
-        Matrix matrixStaticSum = Matrix.Sum(matrix5, matrix6);
+        Matrix matrixStaticSum = Matrix.getSum(matrix5, matrix6);
 
         for (int i = 0; i < matrixStaticSum.getDimensions()[0]; i++) {
             System.out.println(matrixStaticSum.getVectorRow(i));
         }
 
 
-        System.out.println("Результат вычитания матрицы 6 из  матрицы 5:");
-        Matrix matrixDiff = matrix5.getDifference(matrix6);
+        System.out.println("Результат вычитания матрицы 6 из матрицы 5:");
+        Matrix matrixDiff = matrix5.subtract(matrix6);
 
         for (int i = 0; i < matrixDiff.getDimensions()[0]; i++) {
             System.out.println(matrixDiff.getVectorRow(i));
@@ -128,14 +128,14 @@ public class MatrixMain {
 
 
         System.out.println("Результат статической функции вычитания матрицы 6 из матрицы 5:");
-        Matrix matrixStaticDiff = Matrix.Diff(matrix5, matrix6);
+        Matrix matrixStaticDiff = Matrix.getDifference(matrix5, matrix6);
 
         for (int i = 0; i < matrixStaticDiff.getDimensions()[0]; i++) {
             System.out.println(matrixStaticDiff.getVectorRow(i));
         }
 
         System.out.println("Результат статической функции умножения матрицы 5 на 6:");
-        Matrix matrixMul = Matrix.multiplicate(matrix5, matrix6);
+        Matrix matrixMul = Matrix.getMultiplication(matrix5, matrix6);
 
         for (int i = 0; i < matrixMul.getDimensions()[0]; i++) {
             System.out.println(matrixMul.getVectorRow(i));
@@ -149,9 +149,15 @@ public class MatrixMain {
         double[] line4MatrixDeterminant = new double[]{3, 4, 5, 4, 13, 14};
         double[] line5MatrixDeterminant = new double[]{6, 7, 8, 9, 5, 15};
         double[] line6MatrixDeterminant = new double[]{10, 11, 12, 13, 14, 6};
+
         double[][] arrayDeterminant = new double[][]{
-                line1MatrixDeterminant, line2MatrixDeterminant, line3MatrixDeterminant,
-                line4MatrixDeterminant, line5MatrixDeterminant, line6MatrixDeterminant};
+                line1MatrixDeterminant,
+                line2MatrixDeterminant,
+                line3MatrixDeterminant,
+                line4MatrixDeterminant,
+                line5MatrixDeterminant,
+                line6MatrixDeterminant
+        };
 
         Matrix matrixDeterminant = new Matrix(arrayDeterminant);
         System.out.println("Определитель матрицы 6: " + matrixDeterminant.getDeterminant());
