@@ -5,30 +5,45 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Scanner;
 
-public class CSV {
+public class Csv {
     public static void main(String[] args) {
-        try {
-            PrintWriter writer = new PrintWriter(
-                    "E:/MyPrograms/ITAcadem/CourseJavaOOP/Homework/CSV/CSVhtml.html");
-            Scanner scanner = new Scanner(new FileInputStream(
-                    "E:/MyPrograms/ITAcadem/CourseJavaOOP/Homework/CSV/CSVInput.txt"));
-
-            writer.println("<table border=\"1\"");
-            writer.print("<tr><td>");
+        try (Scanner scanner = new Scanner(new FileInputStream(args[0]));
+             PrintWriter writer = new PrintWriter(args[1])) {
+            writer.println("<!DOCTYPE html>");
+            writer.println("<html>");
+            writer.println("    <head>");
+            writer.println("        <meta charset=\"utf-8\">");
+            writer.println("        <title>Перевод CSV в HTML</title>");
+            writer.println("    </head>");
+            writer.println("    <body>");
+            writer.println("        <table border=\"1\">");
+            writer.print("              <tr><td>");
 
             boolean isPlainTextInsideTableDetail = false;
             boolean isNewLine = false;
 
             while (scanner.hasNextLine()) {
                 String s = scanner.nextLine();
-                if (isNewLine) {
-                    writer.print("<br/><tr><td>");
+                if (isNewLine && !isPlainTextInsideTableDetail) {
+                    writer.println("");
+                    writer.print("              <tr><td>");
                 }
 
-                for (int i = 0; i < s.length(); i++) {
+                char quote = '"';
+                char comma = ',';
+                int i = 0;
+
+                if (s.charAt(0) == quote) {
+                    isPlainTextInsideTableDetail = true;
+                    i = 1;
+                }
+                if (s.charAt(0) == comma) {
+                    isPlainTextInsideTableDetail = false;
+                    i = 1;
+                }
+
+                for (; i < s.length(); i++) {
                     char c = s.charAt(i);
-                    char quote = '"';
-                    char comma = ',';
 
                     if (c == quote && s.charAt(i - 1) == comma) {
                         isPlainTextInsideTableDetail = true;
@@ -43,11 +58,11 @@ public class CSV {
                     }
 
                     if (c == '<') {
-                        writer.print("&lt");
+                        writer.print("&lt;");
                     } else if (c == '>') {
-                        writer.print("&gt");
+                        writer.print("&gt;");
                     } else if (c == '&') {
-                        writer.print("&amp");
+                        writer.print("&amp;");
                     } else if (c == comma && s.charAt(i - 1) == quote
                             && s.charAt(i - 2) == quote
                             && s.charAt(i - 3) != quote) {
@@ -66,12 +81,13 @@ public class CSV {
                     isNewLine = true;
                 }
             }
-            writer.println("</table>");
-            writer.close();
 
+            writer.println("");
+            writer.println("        </table>");
+            writer.println("    </body>");
+            writer.println("</html>");
         } catch (IOException e) {
             System.out.println("Ошибка записи в файл: " + e.getMessage());
-            e.printStackTrace();
         }
     }
 }
