@@ -5,12 +5,12 @@ import java.util.Arrays;
 public class Vector {
     private double[] components;
 
-    public Vector(int dimension) {
-        if (dimension <= 0) {
-            throw new IllegalArgumentException("Dimension = " + dimension + ". Dimension can't be <= 0");
+    public Vector(int size) {
+        if (size <= 0) {
+            throw new IllegalArgumentException("Size = " + size + ". Size can't be <= 0");
         }
 
-        components = new double[dimension];
+        components = new double[size];
     }
 
     public Vector(Vector vector) {
@@ -25,15 +25,12 @@ public class Vector {
         components = Arrays.copyOf(array, array.length);
     }
 
-    public Vector(int dimension, double[] array) {
-        if (dimension <= 0) {
-            throw new IllegalArgumentException("Dimension = " + dimension + ". Dimension can't be <= 0");
-        }
-        if (array.length == 0) {
-            throw new IllegalArgumentException("Array length = 0. Array length can't be = 0");
+    public Vector(int size, double[] array) {
+        if (size <= 0) {
+            throw new IllegalArgumentException("Size = " + size + ". Size can't be <= 0");
         }
 
-        components = Arrays.copyOf(array, dimension);
+        components = Arrays.copyOf(array, size);
     }
 
     public int getSize() {
