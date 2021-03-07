@@ -1,14 +1,26 @@
 package ru.academits.java.ozhgibesov.arrayListHome;
 
 import java.io.FileInputStream;
-import java.io.IOException;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
 
 public class ArrayListHome {
     public static void main(String[] args) {
-        try (Scanner scanner = new Scanner(new FileInputStream(args[0]))) {
+        printFileStrings("E:\\MyPrograms\\ITAcadem\\CourseJavaOOP\\Homework\\ArrayListHome\\strings.txt");
+
+        ArrayList<Integer> numbers = new ArrayList<>(Arrays.asList(-2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20));
+        removeEvenNumbers(numbers);
+        System.out.println("Решение 2й части задачи ArrayListHome: " + numbers);
+
+        ArrayList<Integer> inputIntegerList = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 2, 6, 1, 7, 5, 8, 9, 2, 3, 10, 2, 9));
+        ArrayList<Integer> outputIntegerList = removeDuplicateNumbers(inputIntegerList);
+        System.out.println("Решение 3й части задачи ArrayListHome: " + outputIntegerList);
+    }
+
+    public static void printFileStrings(String path) {
+        try (Scanner scanner = new Scanner(new FileInputStream(path))) {
             ArrayList<String> strings = new ArrayList<>();
 
             while (scanner.hasNextLine()) {
@@ -16,30 +28,28 @@ public class ArrayListHome {
             }
 
             System.out.println("Решение 1й части задачи ArrayListHome: " + strings);
-        } catch (IOException e) {
-            System.out.println("Ошибка записи в файл: " + e.getMessage());
+        } catch (FileNotFoundException e) {
+            System.out.println("Файл с исходныи данными не обнаружен: " + e.getMessage());
         }
+    }
 
-        ArrayList<Integer> numbers = new ArrayList<>(Arrays.asList(-2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20));
-
-        for (int i = 0; i < numbers.size(); i++) {
-            if (numbers.get(i) % 2 == 0) {
-                numbers.remove(i);
+    public static void removeEvenNumbers(ArrayList<Integer> list){
+        for (int i = 0; i < list.size(); i++) {
+            if (list.get(i) % 2 == 0) {
+                list.remove(i);
                 --i;
             }
         }
+    }
 
-        System.out.println("Решение 2й части задачи ArrayListHome: " + numbers);
+    public static ArrayList<Integer> removeDuplicateNumbers(ArrayList<Integer> list){
+        ArrayList<Integer> outputList = new ArrayList<>(5);
 
-        ArrayList<Integer> inputNumbers = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 2, 6, 1, 7, 5, 8, 9, 2, 3, 10, 2, 9));
-        ArrayList<Integer> outputNumbers = new ArrayList<>();
-
-        for (Integer inputNumber : inputNumbers) {
-            if (!outputNumbers.contains(inputNumber)) {
-                outputNumbers.add(inputNumber);
+        for (Integer number : list) {
+            if (!outputList.contains(number)) {
+                outputList.add(number);
             }
         }
-
-        System.out.println("Решение 3й части задачи ArrayListHome: " + outputNumbers);
+        return outputList;
     }
 }
