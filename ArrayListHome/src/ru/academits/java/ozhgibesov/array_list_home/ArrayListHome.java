@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
 
-public class arrayListHome {
+public class ArrayListHome {
     public static void main(String[] args) {
         ArrayList<String> strings = getFileStrings("E:\\MyPrograms\\ITAcadem\\CourseJavaOOP\\Homework\\ArrayListHome\\strings.txt");
         System.out.println("Решение 1й части задачи ArrayListHome: " + strings);
