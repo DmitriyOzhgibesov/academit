@@ -9,7 +9,7 @@ public class SinglyLinkedListMain {
         integerList1.addFirst(0);
 
         for (int i = integerList1.getCount(); i < 10; i++) {
-            integerList1.addListItemByIndex(i, i);
+            integerList1.addByIndex(i, i);
         }
 
         for (int i = 0; i < integerList1.getCount(); i++) {
@@ -29,11 +29,11 @@ public class SinglyLinkedListMain {
         System.out.println("Размер списка = " + integerList1.getCount());
 
         System.out.println("Элемент с индексом 5 = " + integerList1.getDataByIndex(5));
-        System.out.println("Удаляем элемент с индексом 5 равным "+ integerList1.removeByIndex(5));
+        System.out.println("Удаляем элемент с индексом 5 равным " + integerList1.removeByIndex(5));
         System.out.println("Элемент с индексом 5 после выполнения removeByIndex(5) = " + integerList1.getDataByIndex(5));
         System.out.printf("Элемент списка равный 6 удален - %b%n", integerList1.removeByData(4));
 
-        integerList1.setDataByIndex(100,3);
+        integerList1.setDataByIndex(100, 3);
         System.out.println("Печать списка после удаления элментов и установки элементу с индексом 3 значения 100:");
 
         for (int i = 0; i < integerList1.getCount(); i++) {
@@ -44,12 +44,12 @@ public class SinglyLinkedListMain {
         integerList2.addFirst(10);
 
         for (int i = 11; i <= 20; i++) {
-            integerList2.addListItemByIndex(i, i-10);
+            integerList2.addByIndex(i, i - 10);
         }
 
         System.out.println("Размер списка integerList2 = " + integerList2.getCount());
-        SinglyLinkedList<Integer> integerList2Copy = integerList2.copyList();
-        integerList2.reverseList();
+        SinglyLinkedList<Integer> integerList2Copy = integerList2.copy();
+        integerList2.reverse();
 
         System.out.println("Печать копии списка integerList2:");
 
