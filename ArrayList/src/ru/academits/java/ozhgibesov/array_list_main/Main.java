@@ -7,34 +7,34 @@ import java.util.Collection;
 
 public class Main {
     public static void main(String[] args) {
-        NewArrayList<String> list = new NewArrayList<>(Arrays.asList("one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten", "eleven"));
+        NewArrayList<String> list = new NewArrayList<>(Arrays.asList("один", "два", "три", "четыре", "пять", "шесть", "семь", "восемь", "девять", "десять", "одинадцать"));
 
-        System.out.println("The list size is " + list.size());
-        System.out.println("Is list empty? " + list.isEmpty());
-        System.out.println("Does list contain \"five\"? " + list.contains("five"));
-        System.out.println("Does list contain \"thirty\"? " + list.contains("thirty"));
+        System.out.println("Размер списка " + list.size());
+        System.out.println("Спусок пуст? " + list.isEmpty());
+        System.out.println("Список содержит \"пять\"? " + list.contains("пять"));
+        System.out.println("Список содержит \"три\"? " + list.contains("три"));
 
-        list.remove("five");
+        list.remove("пять");
 
         System.out.println(list);
 
-        Collection<String> collection1 = Arrays.asList("three", "seven", "twenty");
-        Collection<String> collection2 = Arrays.asList("three", "seven", "six");
+        Collection<String> collection1 = Arrays.asList("три", "семь", "двенадцать");
+        Collection<String> collection2 = Arrays.asList("три", "семь", "шесть");
 
-        System.out.println("Does list contain all elements of first array? " + list.containsAll(collection1));
-        System.out.println("Does list contain all elements of second array? " + list.containsAll(collection2));
+        System.out.println("Содержит ли список все элементы первого массива? " + list.containsAll(collection1));
+        System.out.println("Содержит ли список все элементы второго массива? " + list.containsAll(collection2));
 
         list.removeAll(collection2);
 
-        System.out.println("Does list contain all elements of second array? " + list.containsAll(collection2));
+        System.out.println("Содержит ли список все элементы второго массива? " + list.containsAll(collection2));
 
         list.addAll(collection2);
 
-        System.out.println("Does list contain all elements of second array? " + list.containsAll(collection2));
+        System.out.println("Содержит ли список все элементы второго массива? " + list.containsAll(collection2));
 
         list.retainAll(collection2);
-        System.out.println("Does list contain element \"one\" " + list.contains("one"));
+        System.out.println("Список содержит \"один\" " + list.contains("один"));
 
-        System.out.println("Does list contain all elements of second array? " + list.containsAll(collection2));
+        System.out.println("Содержит ли список все элементы второго массива? " + list.containsAll(collection2));
     }
 }

@@ -15,7 +15,7 @@ public class MyMainWindow implements MainWindow {
 
     public void run() {
         SwingUtilities.invokeLater(() -> {
-            JFrame mainFrame = new JFrame("Temperature");
+            JFrame mainFrame = new JFrame("Температура");
 
             mainFrame.setVisible(true);
             mainFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -26,7 +26,7 @@ public class MyMainWindow implements MainWindow {
             JPanel inputScalePanel = new JPanel();
             mainFrame.add(inputScalePanel, BorderLayout.PAGE_START);
 
-            JLabel fromLabel = new JLabel("From:");
+            JLabel fromLabel = new JLabel("Из:");
             inputScalePanel.add(fromLabel);
 
             ButtonGroup inputScaleGroup = new ButtonGroup();
@@ -42,7 +42,7 @@ public class MyMainWindow implements MainWindow {
             JPanel outputScalePanel = new JPanel();
             mainFrame.add(outputScalePanel, BorderLayout.PAGE_END);
 
-            JLabel outputLabel = new JLabel("To:");
+            JLabel outputLabel = new JLabel("В:");
             outputScalePanel.add(outputLabel);
 
             ButtonGroup outputScaleGroup = new ButtonGroup();
@@ -73,7 +73,7 @@ public class MyMainWindow implements MainWindow {
             JPanel convertPanel = new JPanel();
             mainFrame.add(convertPanel);
 
-            JButton convertButton = new JButton("convert");
+            JButton convertButton = new JButton("перевести");
             convertPanel.add(convertButton);
 
             convertButton.addActionListener(e -> {
@@ -82,9 +82,9 @@ public class MyMainWindow implements MainWindow {
 
                     outputText.setText(String.format("%.2f", output));
                 } catch (NumberFormatException exception) {
-                    JOptionPane.showMessageDialog(mainFrame, "The input data must be number!");
+                    JOptionPane.showMessageDialog(mainFrame, "Входные данные должны быть числовыми!");
                 } catch (NullPointerException exception) {
-                    JOptionPane.showMessageDialog(mainFrame, "You should choose input and output scales");
+                    JOptionPane.showMessageDialog(mainFrame, "Вы должны выбрать масштаб ввода и вывода");
                 }
             });
         });

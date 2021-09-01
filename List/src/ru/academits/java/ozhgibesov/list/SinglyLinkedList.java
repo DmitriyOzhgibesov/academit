@@ -79,7 +79,13 @@ public class SinglyLinkedList<T> {
     }
 
     public void addByIndex(T data, int index) {
-        checkIndex(index);
+        if (index < 0) {
+            throw new IndexOutOfBoundsException("Индекс не может быть меньше 0. Индекс = " + index);
+        }
+
+        if (index > count) {
+            throw new IndexOutOfBoundsException("Невозможно вставить данные в индекс (" + index + ") т.к. индекс больше допустимого предела (" + count + ")");
+        }
 
         if (index == 0) {
             addFirst(data);

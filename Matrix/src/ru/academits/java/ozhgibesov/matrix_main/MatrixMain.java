@@ -7,7 +7,7 @@ public class MatrixMain {
     public static void main(String[] args) {
         System.out.println("Матрица 1:");
         Matrix matrix1 = new Matrix(3, 3);
-        System.out.printf("Размерность матрицы 2:%dx%d%n", matrix1.getRowsCount(), matrix1.getColumnsCount());
+        System.out.printf("Размерность матрицы 2:%dx%d%n", matrix1.getRowsCount(), matrix1.getVectorMaxSize());
         for (int i = 0; i < matrix1.getRowsCount(); i++) {
             System.out.println(matrix1.getRow(i));
         }
@@ -19,7 +19,7 @@ public class MatrixMain {
 
         System.out.println("Матрица 2:");
         Matrix matrix2 = new Matrix(array);
-        System.out.printf("Размерность матрицы 2:%dx%d%n", matrix2.getRowsCount(), matrix2.getColumnsCount());
+        System.out.printf("Размерность матрицы 2:%dx%d%n", matrix2.getRowsCount(), matrix2.getVectorMaxSize());
 
         for (int i = 0; i < matrix2.getRowsCount(); i++) {
             System.out.println(matrix2.getRow(i));
@@ -33,7 +33,7 @@ public class MatrixMain {
         System.out.println("Матрица 3:");
         Matrix matrix3 = new Matrix(vectorArray);
 
-        System.out.printf("Размерность матрицы 3:%dx%d%n", matrix3.getRowsCount(), matrix3.getColumnsCount());
+        System.out.printf("Размерность матрицы 3:%dx%d%n", matrix3.getRowsCount(), matrix3.getVectorMaxSize());
 
         for (int i = 0; i < matrix3.getRowsCount(); i++) {
             System.out.println(matrix3.getRow(i));
@@ -41,7 +41,7 @@ public class MatrixMain {
 
         System.out.println("Матрица 4:");
         Matrix matrix4 = new Matrix(matrix3);
-        System.out.printf("Размерность матрицы 4:%dx%d%n", matrix4.getRowsCount(), matrix4.getColumnsCount());
+        System.out.printf("Размерность матрицы 4:%dx%d%n", matrix4.getRowsCount(), matrix4.getVectorMaxSize());
 
         for (int i = 0; i < matrix4.getRowsCount(); i++) {
             System.out.println(matrix4.getRow(i));
@@ -58,7 +58,7 @@ public class MatrixMain {
         System.out.println("Результат транспонирования матрицы 4:");
         Matrix transposition = matrix4.transpose();
 
-        System.out.printf("Размерность транспонированной матрицы 4:%dx%d%n", transposition.getRowsCount(), transposition.getColumnsCount());
+        System.out.printf("Размерность транспонированной матрицы 4:%dx%d%n", transposition.getRowsCount(), transposition.getVectorMaxSize());
 
         for (int i = 0; i < transposition.getRowsCount(); i++) {
             System.out.println(transposition.getRow(i));

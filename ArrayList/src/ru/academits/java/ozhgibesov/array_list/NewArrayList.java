@@ -16,7 +16,7 @@ public class NewArrayList<T> implements List<T> {
 
     public NewArrayList(int capacity) {
         if (capacity < 0) {
-            throw new IllegalArgumentException("The capacity (" + capacity + ") can't be less than 0");
+            throw new IllegalArgumentException("Емкость (" + capacity + ") не может быть меньше нуля");
         }
 
         //noinspection unchecked
@@ -84,7 +84,7 @@ public class NewArrayList<T> implements List<T> {
     @Override
     public void add(int index, T item) {
         if (index < 0 || index > size) {
-            throw new IndexOutOfBoundsException("The index " + index + " can't be less than 0 or be bigger than list size " + size);
+            throw new IndexOutOfBoundsException("Индекс " + index + " не может быть меньше 0, равно или больше размера списка " + size);
         }
 
         if (size >= items.length) {
@@ -138,7 +138,7 @@ public class NewArrayList<T> implements List<T> {
     @Override
     public T remove(int index) {
         if (index < 0 || index >= size) {
-            throw new IndexOutOfBoundsException("The index " + index + " can't be less than 0 or be equal or bigger than list size " + size);
+            throw new IndexOutOfBoundsException("Индекс " + index + " не может быть меньше 0, равно или больше размера списка " + size);
         }
 
         T oldItem = items[index];
@@ -172,7 +172,7 @@ public class NewArrayList<T> implements List<T> {
     @Override
     public boolean addAll(int index, Collection<? extends T> c) {
         if (index < 0 || index > size) {
-            throw new IndexOutOfBoundsException("The index " + index + " can't be less than 0 or be bigger than list size " + size);
+            throw new IndexOutOfBoundsException("Индекс " + index + " не может быть меньше 0, равно или больше размера списка " + size);
         }
 
         if (c.isEmpty()) {
@@ -254,7 +254,7 @@ public class NewArrayList<T> implements List<T> {
     @Override
     public T get(int index) {
         if (index < 0 || index >= size) {
-            throw new IndexOutOfBoundsException("The index " + index + " can't be less than 0 or be equal or bigger than list size " + size);
+            throw new IndexOutOfBoundsException("Индекс " + index + " не может быть меньше 0, равно или больше размера списка " + size);
         }
 
         return items[index];
@@ -263,7 +263,7 @@ public class NewArrayList<T> implements List<T> {
     @Override
     public T set(int index, T item) {
         if (index < 0 || index >= size) {
-            throw new IndexOutOfBoundsException("The index " + index + " can't be less than 0 or be equal or bigger than list size " + size);
+            throw new IndexOutOfBoundsException("Индекс " + index + " не может быть меньше 0, равно или больше размера списка " + size);
         }
 
         T oldItem = items[index];
@@ -297,17 +297,17 @@ public class NewArrayList<T> implements List<T> {
 
     @Override
     public ListIterator<T> listIterator() {
-        throw new UnsupportedOperationException("The class doesn't support the operation");
+        throw new UnsupportedOperationException("Класс не поддерживает операцию");
     }
 
     @Override
     public ListIterator<T> listIterator(int index) {
-        throw new UnsupportedOperationException("The class doesn't support the operation");
+        throw new UnsupportedOperationException("Класс не поддерживает операцию");
     }
 
     @Override
     public List<T> subList(int fromIndex, int toIndex) {
-        throw new UnsupportedOperationException("The class doesn't support the operation");
+        throw new UnsupportedOperationException("Класс не поддерживает операцию");
     }
 
     private class MyArrayListIterator implements Iterator<T> {
@@ -327,11 +327,11 @@ public class NewArrayList<T> implements List<T> {
         @Override
         public T next() {
             if (savedModCount != modCount) {
-                throw new ConcurrentModificationException("The list has changed, the new iterator is needed");
+                throw new ConcurrentModificationException("Список изменился, нужен новый итератор");
             }
 
             if (!hasNext()) {
-                throw new NoSuchElementException("The iterator has not next item. It's size is " + size);
+                throw new NoSuchElementException("У итератора нет следующего элемента. Его размер " + size);
             }
 
             currentIndex++;

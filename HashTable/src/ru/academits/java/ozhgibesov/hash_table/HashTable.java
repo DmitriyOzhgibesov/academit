@@ -15,7 +15,7 @@ public class HashTable<T> implements Collection<T> {
 
     public HashTable(int arrayLength) {
         if (arrayLength < 1) {
-            throw new IllegalArgumentException("Hash table lists array length can't be lesser than 1, now it is " + arrayLength);
+            throw new IllegalArgumentException("В хештаблице указана длина массива, которая не может быть меньше 1. Длина массива: " + arrayLength);
         }
 
         //noinspection unchecked
@@ -220,11 +220,11 @@ public class HashTable<T> implements Collection<T> {
         @Override
         public T next() {
             if (savedModCount != modCount) {
-                throw new ConcurrentModificationException("The hash table has been modified, the new iterator is needed");
+                throw new ConcurrentModificationException("Хештаблица изменена, нужен новый итератор");
             }
 
             if (!hasNext()) {
-                throw new NoSuchElementException("The iterator can't get next element, because the collection is over");
+                throw new NoSuchElementException("Итератор не может получить следующий элемент, потому что коллекция закончилась");
             }
 
             while (true) {
@@ -244,7 +244,7 @@ public class HashTable<T> implements Collection<T> {
 
         public void remove() {
             if (currentListIterator == null) {
-                throw new IllegalStateException("It is impossible to remove an element because the iterator doesn't point at any element");
+                throw new IllegalStateException("Невозможно удалить элемент, потому что итератор не указывает ни на один элемент");
             }
 
             currentListIterator.remove();

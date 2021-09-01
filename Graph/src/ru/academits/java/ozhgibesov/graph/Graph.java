@@ -10,12 +10,12 @@ public class Graph {
 
     public Graph(int[][] connections) {
         if (connections.length < 2) {
-            throw new IllegalArgumentException("The connection matrix must have at least 2 rows");
+            throw new IllegalArgumentException("Матрица смежности должна иметь не менее 2 строк.");
         }
 
         for (int[] row : connections) {
             if (row.length != connections.length) {
-                throw new IllegalArgumentException("The connections matrix must be square");
+                throw new IllegalArgumentException("Матрица смежности должна быть квадратной.");
             }
         }
 

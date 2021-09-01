@@ -14,7 +14,7 @@ public class Person {
 
     public Person(String name, int age) {
         if (age < 0) {
-            throw new IllegalArgumentException("The age can't be < 0, now it is " + age);
+            throw new IllegalArgumentException("Возраст не может быть < 0. Указанный возраст: " + age);
         }
 
         this.name = name;

@@ -3,7 +3,7 @@ package ru.academits.java.ozhgibesov.temperature.model;
 public class CelsiusScale implements Scale {
     @Override
     public String getName() {
-        return "Celsius";
+        return "Цельсий";
     }
 
     @Override

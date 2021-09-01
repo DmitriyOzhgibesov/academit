@@ -3,7 +3,7 @@ package ru.academits.java.ozhgibesov.temperature.model;
 public class KelvinScale implements Scale {
     @Override
     public String getName() {
-        return "Kelvin";
+        return "Кельвин";
     }
 
     @Override

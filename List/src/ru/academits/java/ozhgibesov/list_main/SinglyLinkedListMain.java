@@ -8,7 +8,7 @@ public class SinglyLinkedListMain {
         System.out.println("Заполнение списка integerList1:");
         integerList1.addFirst(0);
 
-        for (int i = integerList1.getCount(); i < 10; i++) {
+        for (int i = integerList1.getCount() - 1; i < 10; i++) {
             integerList1.addByIndex(i, i);
         }
 

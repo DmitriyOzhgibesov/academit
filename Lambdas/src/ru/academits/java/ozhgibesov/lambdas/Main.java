@@ -24,7 +24,7 @@ public class Main {
         String uniqueNamesString = personsList.stream()
                 .map(Person::getName)
                 .distinct()
-                .collect(Collectors.joining(", ", "Names: ", "."));
+                .collect(Collectors.joining(", ", "Имена: ", "."));
 
         System.out.println(uniqueNamesString);
 
@@ -34,15 +34,15 @@ public class Main {
                 .average();
 
         if (teensAverageAge.isPresent()) {
-            System.out.println("The average age of people 18 and less year old is " + teensAverageAge.getAsDouble());
+            System.out.println("Средний возраст людей до 18 лет составляет " + teensAverageAge.getAsDouble());
         } else {
-            System.out.println("There are no people younger than 18");
+            System.out.println("В списке нет людей моложе 18 лет");
         }
 
         Map<String, Double> personsMap = personsList.stream()
                 .collect(Collectors.groupingBy(Person::getName, Collectors.averagingInt(Person::getAge)));
 
-        System.out.println("Groups of people by name and their average age: ");
+        System.out.println("Группы людей по имени и их средний возраст: ");
 
         for (Map.Entry<String, Double> n : personsMap.entrySet()) {
             System.out.println(n.getKey() + " " + n.getValue());
@@ -54,7 +54,7 @@ public class Main {
                 .map(Person::getName)
                 .collect(Collectors.toList());
 
-        System.out.println("The list of people 20-45 year old in descendant order:");
+        System.out.println("Список людей 20-45 лет в порядке убывания:");
 
         for (String e : chosenAgePeopleNameList) {
             System.out.println(e);

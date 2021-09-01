@@ -14,22 +14,22 @@ public class Main {
 
         System.out.println(hashTable);
 
-        System.out.println("Let's remove elements 17, 19. The result table is:");
+        System.out.println("Удалим элементы 17, 19. Результат операции:");
         hashTable.removeAll(Arrays.asList(17, 19));
 
         System.out.println(hashTable);
 
-        System.out.println("Let's add them back:");
+        System.out.println("Добавим элементы обратно:");
         hashTable.addAll(Arrays.asList(17, 19));
 
         System.out.println(hashTable);
 
-        System.out.println("Let's retain elements 3, 5, 6. The result table is:");
+        System.out.println("Внесем элементы 3, 5, 6. Результат операции:");
         hashTable.retainAll(Arrays.asList(3, 5, 6));
 
         System.out.println(hashTable);
 
-        System.out.println("Let's make an array. The 0 index element is:");
+        System.out.println("Преобразуем хештаблицу в массив. Элемент с индексом 0 равен:");
 
         System.out.println(hashTable.toArray()[0]);
     }

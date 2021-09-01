@@ -3,7 +3,7 @@ package ru.academits.java.ozhgibesov.temperature.model;
 public class FahrenheitScale implements Scale {
     @Override
     public String getName() {
-        return "Fahrenheit";
+        return "Фаренгейт";
     }
 
     @Override
