@@ -7,7 +7,7 @@ public class MatrixMain {
     public static void main(String[] args) {
         System.out.println("Матрица 1:");
         Matrix matrix1 = new Matrix(3, 3);
-        System.out.printf("Размерность матрицы 2:%dx%d%n", matrix1.getRowsCount(), matrix1.getVectorMaxSize());
+        System.out.printf("Размерность матрицы 2:%dx%d%n", matrix1.getRowsCount(), matrix1.getColumnsCount());
         for (int i = 0; i < matrix1.getRowsCount(); i++) {
             System.out.println(matrix1.getRow(i));
         }
@@ -19,7 +19,7 @@ public class MatrixMain {
 
         System.out.println("Матрица 2:");
         Matrix matrix2 = new Matrix(array);
-        System.out.printf("Размерность матрицы 2:%dx%d%n", matrix2.getRowsCount(), matrix2.getVectorMaxSize());
+        System.out.printf("Размерность матрицы 2:%dx%d%n", matrix2.getRowsCount(), matrix2.getColumnsCount());
 
         for (int i = 0; i < matrix2.getRowsCount(); i++) {
             System.out.println(matrix2.getRow(i));
@@ -33,7 +33,7 @@ public class MatrixMain {
         System.out.println("Матрица 3:");
         Matrix matrix3 = new Matrix(vectorArray);
 
-        System.out.printf("Размерность матрицы 3:%dx%d%n", matrix3.getRowsCount(), matrix3.getVectorMaxSize());
+        System.out.printf("Размерность матрицы 3:%dx%d%n", matrix3.getRowsCount(), matrix3.getColumnsCount());
 
         for (int i = 0; i < matrix3.getRowsCount(); i++) {
             System.out.println(matrix3.getRow(i));
@@ -41,7 +41,7 @@ public class MatrixMain {
 
         System.out.println("Матрица 4:");
         Matrix matrix4 = new Matrix(matrix3);
-        System.out.printf("Размерность матрицы 4:%dx%d%n", matrix4.getRowsCount(), matrix4.getVectorMaxSize());
+        System.out.printf("Размерность матрицы 4:%dx%d%n", matrix4.getRowsCount(), matrix4.getColumnsCount());
 
         for (int i = 0; i < matrix4.getRowsCount(); i++) {
             System.out.println(matrix4.getRow(i));
@@ -58,7 +58,7 @@ public class MatrixMain {
         System.out.println("Результат транспонирования матрицы 4:");
         Matrix transposition = matrix4.transpose();
 
-        System.out.printf("Размерность транспонированной матрицы 4:%dx%d%n", transposition.getRowsCount(), transposition.getVectorMaxSize());
+        System.out.printf("Размерность транспонированной матрицы 4:%dx%d%n", transposition.getRowsCount(), transposition.getColumnsCount());
 
         for (int i = 0; i < transposition.getRowsCount(); i++) {
             System.out.println(transposition.getRow(i));
@@ -119,13 +119,13 @@ public class MatrixMain {
         }
 
         System.out.println("Результат статической функции умножения матрицы 5 на 6:");
-        Matrix matrixMul = Matrix.getProduct(matrix5, matrix6);
+        Matrix product = Matrix.getProduct(matrix5, matrix6);
 
-        for (int i = 0; i < matrixMul.getRowsCount(); i++) {
-            System.out.println(matrixMul.getRow(i));
+        for (int i = 0; i < product.getRowsCount(); i++) {
+            System.out.println(product.getRow(i));
         }
 
-        System.out.println("Результат работы оператора toString():" + matrixMul);
+        System.out.println("Результат работы оператора toString():" + product);
 
         double[] row1MatrixDeterminant = {1, 1, 2, 3, 4, 5};
         double[] row2MatrixDeterminant = {0, 2, 6, 7, 8, 9};
