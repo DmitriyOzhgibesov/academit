@@ -55,10 +55,10 @@ public class SinglyLinkedList<T> {
         return getListItem(index).getData();
     }
 
-    public T setDataByIndex(T newData, int index) {
+    public T setDataByIndex(int index, T data) {
         ListItem<T> item = getListItem(index);
         T oldData = item.getData();
-        item.setData(newData);
+        item.setData(data);
 
         return oldData;
     }
@@ -71,14 +71,14 @@ public class SinglyLinkedList<T> {
         }
 
         ListItem<T> previousItem = getListItem(index - 1);
-        T deletedData = previousItem.getNext().getData();
+        T removedData = previousItem.getNext().getData();
         previousItem.setNext(previousItem.getNext().getNext());
         count--;
 
-        return deletedData;
+        return removedData;
     }
 
-    public void addByIndex(T data, int index) {
+    public void addByIndex(int index, T data) {
         if (index < 0) {
             throw new IndexOutOfBoundsException("Индекс не может быть меньше 0. Индекс = " + index);
         }
@@ -99,25 +99,30 @@ public class SinglyLinkedList<T> {
     }
 
     public boolean removeByData(T data) {
-        if (head == null) {
+        if (count == 0) {
             return false;
         }
 
-        for (ListItem<T> current = head, previous = null; current != null; previous = current, current = current.getNext()) {
-            if (Objects.equals(current.getData(), data)) {
-                if (previous == null) {
-                    head = head.getNext();
-                } else {
-                    previous.setNext(current.getNext());
+        if (Objects.equals(head.getData(), data)) {
+            removeFirst();
 
-                    if (current.getNext() == null) {
-                        current.setNext(previous);
-                    }
-                }
+            return true;
+        }
+
+        ListItem<T> currentItem = head.getNext();
+        ListItem<T> previousItem = head;
+
+        for (int i = 1; i < count; i++) {
+            if (Objects.equals(currentItem.getData(), data)) {
+                previousItem.setNext(currentItem.getNext());
 
                 count--;
+
                 return true;
             }
+
+            previousItem = currentItem;
+            currentItem = currentItem.getNext();
         }
 
         return false;
@@ -167,23 +172,23 @@ public class SinglyLinkedList<T> {
             return "[]";
         }
 
-        StringBuilder listElementsSequence = new StringBuilder();
+        StringBuilder sb = new StringBuilder();
 
         ListItem<T> currentItem = head;
 
-        listElementsSequence.append("[");
+        sb.append("[");
 
         for (int i = 0; i < count - 1; i++) {
-            listElementsSequence.append(currentItem.getData());
-            listElementsSequence.append(", ");
+            sb.append(currentItem.getData());
+            sb.append(", ");
 
             currentItem = currentItem.getNext();
         }
 
-        listElementsSequence.append(currentItem.getData());
+        sb.append(currentItem.getData());
 
-        listElementsSequence.append("]");
+        sb.append("]");
 
-        return listElementsSequence.toString();
+        return sb.toString();
     }
 }
