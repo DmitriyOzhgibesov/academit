@@ -52,12 +52,12 @@ public class HashTable<T> implements Collection<T> {
     public Object[] toArray() {
         Object[] array = new Object[size];
 
-        int index = 0;
+        int i = 0;
 
         for (T element : this) {
-            array[index] = element;
+            array[i] = element;
 
-            index++;
+            i++;
         }
 
         return array;
