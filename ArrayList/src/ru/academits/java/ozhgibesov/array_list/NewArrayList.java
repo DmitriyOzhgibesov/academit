@@ -83,9 +83,7 @@ public class NewArrayList<T> implements List<T> {
 
     @Override
     public void add(int index, T item) {
-        if (index < 0 || index > size) {
-            throw new IndexOutOfBoundsException("Индекс " + index + " не может быть меньше 0 или больше размера списка " + size);
-        }
+        checkIndexToExclusiveSize(index);
 
         if (size >= items.length) {
             increaseCapacity();
@@ -137,9 +135,7 @@ public class NewArrayList<T> implements List<T> {
 
     @Override
     public T remove(int index) {
-        if (index < 0 || index >= size) {
-            throw new IndexOutOfBoundsException("Индекс " + index + " не может быть меньше 0, равно или больше размера списка " + size);
-        }
+        checkIndexToInclusiveSize(index);
 
         T removedItem = items[index];
 
@@ -171,9 +167,7 @@ public class NewArrayList<T> implements List<T> {
 
     @Override
     public boolean addAll(int index, Collection<? extends T> c) {
-        if (index < 0 || index > size) {
-            throw new IndexOutOfBoundsException("Индекс " + index + " не может быть меньше 0 или больше размера списка " + size);
-        }
+        checkIndexToExclusiveSize(index);
 
         if (c.isEmpty()) {
             return false;
@@ -254,23 +248,15 @@ public class NewArrayList<T> implements List<T> {
 
     @Override
     public T get(int index) {
-        if (index < 0 || index >= size) {
-            throw new IndexOutOfBoundsException("Индекс " + index + " не может быть меньше 0, равно или больше размера списка " + size);
-        }
-
+        checkIndexToInclusiveSize(index);
         return items[index];
     }
 
     @Override
     public T set(int index, T item) {
-        if (index < 0 || index >= size) {
-            throw new IndexOutOfBoundsException("Индекс " + index + " не может быть меньше 0, равно или больше размера списка " + size);
-        }
-
+        checkIndexToInclusiveSize(index);
         T oldItem = items[index];
-
         items[index] = item;
-
         return oldItem;
     }
 
@@ -359,5 +345,17 @@ public class NewArrayList<T> implements List<T> {
         sb.append("]");
 
         return sb.toString();
+    }
+
+    private void checkIndexToInclusiveSize(int index) {
+        if (index < 0 || index >= size) {
+            throw new IndexOutOfBoundsException("Индекс " + index + " не может быть меньше 0, равно или больше размера списка " + size);
+        }
+    }
+
+    private void checkIndexToExclusiveSize(int index) {
+        if (index < 0 || index > size) {
+            throw new IndexOutOfBoundsException("Индекс " + index + " не может быть меньше 0 или больше размера списка " + size);
+        }
     }
 }
