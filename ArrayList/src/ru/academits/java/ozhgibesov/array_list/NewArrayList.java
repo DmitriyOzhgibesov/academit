@@ -84,7 +84,7 @@ public class NewArrayList<T> implements List<T> {
     @Override
     public void add(int index, T item) {
         if (index < 0 || index > size) {
-            throw new IndexOutOfBoundsException("Индекс " + index + " не может быть меньше 0, равно или больше размера списка " + size);
+            throw new IndexOutOfBoundsException("Индекс " + index + " не может быть меньше 0 или больше размера списка " + size);
         }
 
         if (size >= items.length) {
@@ -141,7 +141,7 @@ public class NewArrayList<T> implements List<T> {
             throw new IndexOutOfBoundsException("Индекс " + index + " не может быть меньше 0, равно или больше размера списка " + size);
         }
 
-        T oldItem = items[index];
+        T removedItem = items[index];
 
         System.arraycopy(items, index + 1, items, index, size - index - 1);
 
@@ -150,7 +150,7 @@ public class NewArrayList<T> implements List<T> {
 
         items[size] = null;
 
-        return oldItem;
+        return removedItem;
     }
 
     @Override
@@ -172,7 +172,7 @@ public class NewArrayList<T> implements List<T> {
     @Override
     public boolean addAll(int index, Collection<? extends T> c) {
         if (index < 0 || index > size) {
-            throw new IndexOutOfBoundsException("Индекс " + index + " не может быть меньше 0, равно или больше размера списка " + size);
+            throw new IndexOutOfBoundsException("Индекс " + index + " не может быть меньше 0 или больше размера списка " + size);
         }
 
         if (c.isEmpty()) {
@@ -185,12 +185,12 @@ public class NewArrayList<T> implements List<T> {
 
         System.arraycopy(items, index, items, index + collectionSize, size - index);
 
-        int currentIndex = index;
+        int i = index;
 
         for (T e : c) {
-            items[currentIndex] = e;
+            items[i] = e;
 
-            currentIndex++;
+            i++;
         }
 
         size += c.size();
@@ -240,14 +240,15 @@ public class NewArrayList<T> implements List<T> {
 
     @Override
     public void clear() {
+        if (size == 0) {
+            return;
+        }
+
         for (int i = 0; i < size; i++) {
             items[i] = null;
         }
 
-        if (size != 0) {
-            modCount++;
-        }
-
+        modCount++;
         size = 0;
     }
 

@@ -21,20 +21,20 @@ public class Main {
         Collection<String> collection1 = Arrays.asList("три", "семь", "двенадцать");
         Collection<String> collection2 = Arrays.asList("три", "семь", "шесть");
 
-        System.out.println("Содержит ли список все элементы первого массива? " + list.containsAll(collection1));
-        System.out.println("Содержит ли список все элементы второго массива? " + list.containsAll(collection2));
+        System.out.println("Содержит ли список все элементы первого списка? " + list.containsAll(collection1));
+        System.out.println("Содержит ли список все элементы второго списка? " + list.containsAll(collection2));
 
         list.removeAll(collection2);
 
-        System.out.println("Содержит ли список все элементы второго массива? " + list.containsAll(collection2));
+        System.out.println("Содержит ли список все элементы второго списка? " + list.containsAll(collection2));
 
         list.addAll(collection2);
 
-        System.out.println("Содержит ли список все элементы второго массива? " + list.containsAll(collection2));
+        System.out.println("Содержит ли список все элементы второго списка? " + list.containsAll(collection2));
 
         list.retainAll(collection2);
         System.out.println("Список содержит \"один\" " + list.contains("один"));
 
-        System.out.println("Содержит ли список все элементы второго массива? " + list.containsAll(collection2));
+        System.out.println("Содержит ли список все элементы второго списка? " + list.containsAll(collection2));
     }
 }
