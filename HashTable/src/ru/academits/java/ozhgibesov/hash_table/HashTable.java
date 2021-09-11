@@ -23,7 +23,11 @@ public class HashTable<T> implements Collection<T> {
     }
 
     private int getListIndex(Object o) {
-        return Objects.hashCode(o) % lists.length;
+        if (o == null) {
+            return 0;
+        }
+
+        return Math.abs(Objects.hashCode(o) % lists.length);
     }
 
     @Override
@@ -140,13 +144,21 @@ public class HashTable<T> implements Collection<T> {
 
     @Override
     public boolean removeAll(Collection<?> c) {
-        int savedModCount = modCount;
+        int currentSize = size;
 
-        for (Object obj : c) {
-            remove(obj);
+        for (LinkedList<T> indexList : lists) {
+            if (indexList != null) {
+                size -= indexList.size();
+                indexList.removeAll(c);
+                size += indexList.size();
+            }
         }
 
-        return savedModCount != modCount;
+        if (currentSize != size) {
+            modCount++;
+        }
+
+        return currentSize != size;
     }
 
     @Override
