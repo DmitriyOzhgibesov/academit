@@ -21,12 +21,12 @@ public class Main {
                 new Person("Евгений", 13)
         );
 
-        String uniqueNamesString = personsList.stream()
+        List<String> uniqueNamesString = personsList.stream()
                 .map(Person::getName)
                 .distinct()
-                .collect(Collectors.joining(", ", "Список уникальных имен: ", "."));
+                .collect(Collectors.toList());
 
-        System.out.println(uniqueNamesString);
+        System.out.println("Список уникальных имен: " + uniqueNamesString);
 
         OptionalDouble teensAverageAge = personsList.stream()
                 .filter(x -> x.getAge() < 18)
