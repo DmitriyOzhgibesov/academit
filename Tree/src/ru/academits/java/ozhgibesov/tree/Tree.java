@@ -131,7 +131,7 @@ public class Tree<T> {
 
             if (dataNodeWithParent.isNodeLeft()) {
                 dataNodeParent.setLeft(null);
-
+                count--;
                 return true;
             }
 
@@ -186,10 +186,6 @@ public class Tree<T> {
 
         if (dataNode.getRight() != currentNode) {
             currentNode.setRight(dataNode.getRight());
-        }
-
-        if (dataNode.getLeft() != null) {
-            currentNode.setLeft(dataNode.getLeft());
         }
 
         if (dataNode == root) {
