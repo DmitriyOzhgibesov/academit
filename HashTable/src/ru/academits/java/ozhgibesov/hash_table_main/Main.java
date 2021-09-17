@@ -24,7 +24,7 @@ public class Main {
 
         System.out.println(hashTable);
 
-        System.out.println("Внесем элементы 3, 5, 6. Результат операции:");
+        System.out.println("Удалим все, что не принадлежит значениям: 3, 5, 6. Результат операции:");
         hashTable.retainAll(Arrays.asList(3, 5, 6));
 
         System.out.println(hashTable);

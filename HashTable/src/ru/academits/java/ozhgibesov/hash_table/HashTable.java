@@ -144,6 +144,11 @@ public class HashTable<T> implements Collection<T> {
 
     @Override
     public boolean removeAll(Collection<?> c) {
+        if (c.size() == 0)
+        {
+            return false;
+        }
+
         int currentSize = size;
 
         for (LinkedList<T> indexList : lists) {
@@ -163,29 +168,26 @@ public class HashTable<T> implements Collection<T> {
 
     @Override
     public boolean retainAll(Collection<?> c) {
-        boolean isTableChanged = false;
+        if (c.size() == 0)
+        {
+            return false;
+        }
+
+        int currentSize = size;
 
         for (LinkedList<T> list : lists) {
-            if (list == null) {
-                continue;
-            }
-
-            int savedListSize = list.size();
-
-            if (list.retainAll(c)) {
-                isTableChanged = true;
-
-                size -= savedListSize - list.size();
+            if (list != null) {
+                size -= list.size();
+                list.retainAll(c);
+                size += list.size();
             }
         }
 
-        if (isTableChanged) {
+        if (currentSize != size) {
             modCount++;
-
-            return true;
         }
 
-        return false;
+        return currentSize != size;
     }
 
     @Override
