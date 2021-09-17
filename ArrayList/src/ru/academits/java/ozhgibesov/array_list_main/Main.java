@@ -1,16 +1,16 @@
 package ru.academits.java.ozhgibesov.array_list_main;
 
-import ru.academits.java.ozhgibesov.array_list.NewArrayList;
+import ru.academits.java.ozhgibesov.array_list.MyArrayList;
 
 import java.util.Arrays;
 import java.util.Collection;
 
 public class Main {
     public static void main(String[] args) {
-        NewArrayList<String> list = new NewArrayList<>(Arrays.asList("один", "два", "три", "четыре", "пять", "шесть", "семь", "восемь", "девять", "десять", "одинадцать"));
+        MyArrayList<String> list = new MyArrayList<>(Arrays.asList("один", "два", "три", "четыре", "пять", "шесть", "семь", "восемь", "девять", "десять", "одиннадцать"));
 
         System.out.println("Размер списка " + list.size());
-        System.out.println("Спусок пуст? " + list.isEmpty());
+        System.out.println("Список пуст? " + list.isEmpty());
         System.out.println("Список содержит \"пять\"? " + list.contains("пять"));
         System.out.println("Список содержит \"три\"? " + list.contains("три"));
 

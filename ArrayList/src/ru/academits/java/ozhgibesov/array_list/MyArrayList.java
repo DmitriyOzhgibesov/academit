@@ -2,7 +2,7 @@ package ru.academits.java.ozhgibesov.array_list;
 
 import java.util.*;
 
-public class NewArrayList<T> implements List<T> {
+public class MyArrayList<T> implements List<T> {
     private static final int DEFAULT_CAPACITY = 10;
 
     private int size;
@@ -10,11 +10,11 @@ public class NewArrayList<T> implements List<T> {
     private int modCount;
 
     @SuppressWarnings("unchecked")
-    public NewArrayList() {
+    public MyArrayList() {
         items = (T[]) new Object[DEFAULT_CAPACITY];
     }
 
-    public NewArrayList(int capacity) {
+    public MyArrayList(int capacity) {
         if (capacity < 0) {
             throw new IllegalArgumentException("Емкость (" + capacity + ") не может быть меньше нуля");
         }
@@ -23,7 +23,7 @@ public class NewArrayList<T> implements List<T> {
         items = (T[]) new Object[capacity];
     }
 
-    public NewArrayList(Collection<? extends T> collection) {
+    public MyArrayList(Collection<? extends T> collection) {
         //noinspection unchecked
         items = (T[]) new Object[collection.size()];
 
@@ -83,7 +83,7 @@ public class NewArrayList<T> implements List<T> {
 
     @Override
     public void add(int index, T item) {
-        checkIndexToExclusiveSize(index);
+        checkIndexToInclusiveSize(index);
 
         if (size >= items.length) {
             increaseCapacity();
@@ -135,7 +135,7 @@ public class NewArrayList<T> implements List<T> {
 
     @Override
     public T remove(int index) {
-        checkIndexToInclusiveSize(index);
+        checkIndex(index);
 
         T removedItem = items[index];
 
@@ -167,7 +167,7 @@ public class NewArrayList<T> implements List<T> {
 
     @Override
     public boolean addAll(int index, Collection<? extends T> c) {
-        checkIndexToExclusiveSize(index);
+        checkIndexToInclusiveSize(index);
 
         if (c.isEmpty()) {
             return false;
@@ -187,7 +187,7 @@ public class NewArrayList<T> implements List<T> {
             i++;
         }
 
-        size += c.size();
+        size += collectionSize;
 
         modCount++;
 
@@ -248,13 +248,13 @@ public class NewArrayList<T> implements List<T> {
 
     @Override
     public T get(int index) {
-        checkIndexToInclusiveSize(index);
+        checkIndex(index);
         return items[index];
     }
 
     @Override
     public T set(int index, T item) {
-        checkIndexToInclusiveSize(index);
+        checkIndex(index);
         T oldItem = items[index];
         items[index] = item;
         return oldItem;
@@ -347,13 +347,13 @@ public class NewArrayList<T> implements List<T> {
         return sb.toString();
     }
 
-    private void checkIndexToInclusiveSize(int index) {
+    private void checkIndex(int index) {
         if (index < 0 || index >= size) {
             throw new IndexOutOfBoundsException("Индекс " + index + " не может быть меньше 0, равно или больше размера списка " + size);
         }
     }
 
-    private void checkIndexToExclusiveSize(int index) {
+    private void checkIndexToInclusiveSize(int index) {
         if (index < 0 || index > size) {
             throw new IndexOutOfBoundsException("Индекс " + index + " не может быть меньше 0 или больше размера списка " + size);
         }
