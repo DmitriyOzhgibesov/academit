@@ -17,15 +17,15 @@ public class TreeNode<T> {
         return left;
     }
 
-    public void setLeft(TreeNode<T> child) {
-        left = child;
+    public void setLeft(TreeNode<T> left) {
+        this.left = left;
     }
 
     public TreeNode<T> getRight() {
         return right;
     }
 
-    public void setRight(TreeNode<T> child) {
-        right = child;
+    public void setRight(TreeNode<T> right) {
+        this.right = right;
     }
 }
