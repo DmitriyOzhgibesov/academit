@@ -29,8 +29,8 @@ public class Main {
 
         System.out.println(hashTable);
 
-        System.out.println("Преобразуем хештаблицу в массив. Элемент с индексом 0 равен:");
+        System.out.print("Преобразуем хештаблицу в массив: ");
 
-        System.out.println(hashTable.toArray()[0]);
+        System.out.println(Arrays.toString(hashTable.toArray()));
     }
 }

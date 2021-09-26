@@ -144,8 +144,7 @@ public class HashTable<T> implements Collection<T> {
 
     @Override
     public boolean removeAll(Collection<?> c) {
-        if (c.size() == 0)
-        {
+        if (c.size() == 0) {
             return false;
         }
 
@@ -168,26 +167,26 @@ public class HashTable<T> implements Collection<T> {
 
     @Override
     public boolean retainAll(Collection<?> c) {
-        if (c.size() == 0)
-        {
+        if (c.size() == 0) {
             return false;
         }
 
         int currentSize = size;
 
-        for (LinkedList<T> list : lists) {
-            if (list != null) {
-                size -= list.size();
-                list.retainAll(c);
-                size += list.size();
+        for (LinkedList<T> indexList : lists) {
+            if (indexList != null) {
+                size -= indexList.size();
+                indexList.retainAll(c);
+                size += indexList.size();
             }
         }
 
         if (currentSize != size) {
             modCount++;
+            return true;
         }
 
-        return currentSize != size;
+        return false;
     }
 
     @Override
