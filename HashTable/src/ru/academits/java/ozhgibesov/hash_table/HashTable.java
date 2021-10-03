@@ -167,21 +167,22 @@ public class HashTable<T> implements Collection<T> {
 
     @Override
     public boolean retainAll(Collection<?> c) {
-        if (c.size() == 0) {
-            return false;
-        }
+        boolean isTableChanged = false;
 
-        int currentSize = size;
+        for (LinkedList<T> list : lists) {
+            if (list == null) {
+                continue;
+            }
 
-        for (LinkedList<T> indexList : lists) {
-            if (indexList != null) {
-                size -= indexList.size();
-                indexList.retainAll(c);
-                size += indexList.size();
+            int savedListSize = list.size();
+
+            if (list.retainAll(c)) {
+                isTableChanged = true;
+                size -= savedListSize - list.size();
             }
         }
 
-        if (currentSize != size) {
+        if (isTableChanged) {
             modCount++;
             return true;
         }
